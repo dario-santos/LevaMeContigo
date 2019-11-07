@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">LevaMeContigo</string>
+
+    <string name="signin_email">Email</string>
+    <string name="signin_password">Palavra-passe</string>
+    <string name="signin_login">Entrar</string>
+    <string name="signin_signup">Criar nova conta</string>
+    <string name="signin_guest">Entrar como anónimo</string>
+    <string name="signin_or">OU</string>
+
+    <string name="signup_name">Name</string>
+    <string name="signup_email">Email</string>
+    <string name="signup_password">Palavra-passe</string>
+    <string name="signup_signup">Criar nova conta</string>
+
+    <string name="changepassword_email">Email</string>
+    <string name="changepassword_password">Palavra-passe</string>
+    <string name="changepassword_aleatory">Palavar-passe aleatória</string>
+    <string name="changepassword_changepassword">Mudar Palavra-passe</string>
+
 </resources>
