@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="pixel_2" />
+        <device id="3.7 FWVGA slider" />
+        <device id="pixel" />
+        <device id="3.4in WQVGA" />
+        <device id="4in WVGA (Nexus S)" />
+        <device id="pixel_3a" />
+        <device id="3.2in QVGA (ADP2)" />
+        <device id="5.1in WVGA" />
+        <device id="wear_square" />
+        <device id="Nexus 5X" />
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dbb416de-eca3-450a-ab8b-21bc81a33674" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_ribbon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_share1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_trophy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/achievements_line.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Achievements.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Achievements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Highscores.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Highscores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/LastWinners.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/LastWinners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Maratona.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Maratona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/TimeAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/TimeAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/UserName.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/UserName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Versus.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Versus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_achievements.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_achievements.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_highscores.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_highscores.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_info.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_last_winners.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_last_winners.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maratona.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maratona.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_time_attack.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_time_attack.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_versus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_versus.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5_API_21" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Party.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="250" column="5" selection-start-line="250" selection-start-column="5" selection-end-line="250" selection-end-column="5" />
+              <folding>
+                <element signature="method#onCreate#0;class#Party#0" />
+                <element signature="method#onResume#0;class#Party#0" />
+                <element signature="method#onPause#0;class#Party#0" />
+                <element signature="method#Initializate#0;class#Party#0" />
+                <element signature="method#GetNextLevel#0;class#Party#0" />
+                <element signature="method#ResetGameState#0;class#Party#0" />
+                <element signature="method#GetRandomWord#0;class#Party#0" />
+                <element signature="method#GetWrongWord#0;class#Party#0" />
+                <element signature="method#SetButtonLetter#0;class#Party#0" />
+                <element signature="method#GetNextPlayer#0;class#Party#0" />
+                <element signature="method#EndGame#0;class#Party#0" />
+                <element signature="method#HandleLetterButton#0;class#Party#0" />
+                <element signature="method#HandleBackButton#0;class#Party#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Maratona.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="244" column="34" selection-start-line="244" selection-start-column="34" selection-end-line="244" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#onCreate#0;class#Maratona#0" />
+                <element signature="method#onResume#0;class#Maratona#0" />
+                <element signature="method#onPause#0;class#Maratona#0" />
+                <element signature="method#GetDifficulty#0;class#Maratona#0" />
+                <element signature="method#ResetGameState#0;class#Maratona#0" />
+                <element signature="method#GetRandomWord#0;class#Maratona#0" />
+                <element signature="method#GetWrongWord#0;class#Maratona#0" />
+                <element signature="method#SetButtonLetter#0;class#Maratona#0" />
+                <element signature="method#UpdateScore#0;class#Maratona#0" />
+                <element signature="method#HandleBackButton#0;class#Maratona#0" />
+                <element signature="method#HandleShareButton#0;class#Maratona#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_maratona.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/assets/dicionario.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/GenerateLetter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/PartyPlayers.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_user.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_party_players.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Login.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/AjudanteParaAbrirBD.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Info.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_party.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_maratona.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_time_attack.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/achievements_line_dividor.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Menu.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/achievements_line.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_achievements.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/UserName.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/TimeAttack.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Highscores.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_highscores.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/LastWinners.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_last_winners.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_versus.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_info.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Versus.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Achievements.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Party.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dariosantos/wordsdontcomeeasy/Maratona.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="951" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Words Dont Come Easy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordsDontComeEasy" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Words Dont Come Easy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordsDontComeEasy" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Words Dont Come Easy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\dario\OneDrive\Ambiente de Trabalho\WordsDontComeEasy" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="Words Dont Come Easy" type="3d21c010:ScopeViewTreeModel

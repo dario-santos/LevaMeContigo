@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bdc3c7"
+    tools:context=".Perfil">
+
+    <ImageButton
+        android:id="@+id/perfil_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <ImageView
+        android:id="@+id/perfil_userimage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/ic_profile_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_header"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/perfil_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dário Santos"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_userimage"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/perfil_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perfil"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/perfil_back"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/perfil_viagens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23"
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
+        app:layout_constraintEnd_toStartOf="@+id/perfil_avaliacao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/perfil_avaliacao" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Viagens"
+        app:layout_constraintEnd_toEndOf="@+id/perfil_viagens"
+        app:layout_constraintStart_toStartOf="@+id/perfil_viagens"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_viagens" />
+
+    <TextView
+        android:id="@+id/perfil_avaliacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_username"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Avaliação"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/perfil_avaliacao"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_avaliacao" />
+
+    <TextView
+        android:id="@+id/perfil_anos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.2"
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/perfil_avaliacao"
+        app:layout_constraintTop_toTopOf="@+id/perfil_avaliacao" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Anos"
+        app:layout_constraintEnd_toEndOf="@+id/perfil_anos"
+        app:layout_constraintStart_toStartOf="@+id/perfil_anos"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_anos" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
+        app:layout_constraintStart_toEndOf="@+id/perfil_avaliacao"
+        app:layout_constraintTop_toTopOf="@+id/perfil_avaliacao"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/ic_star" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="414dp"
+        android:layout_height="296dp"
+        android:background="#FFFFFF"
+        android:text="SCROLL VIEW AQUI"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="440dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
