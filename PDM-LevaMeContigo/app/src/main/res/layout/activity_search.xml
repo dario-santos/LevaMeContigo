@@ -87,7 +87,6 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:entries="Lisboa; Coimbra; Castelo Branco; Covilhã"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5"
