@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rate">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        android:maxWidth="400dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rate_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/rate_header"
+        android:layout_width="81dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/rate_tv1"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rate_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rate_back" />
+
+    <EditText
+        android:id="@+id/rate_et"
+        android:layout_width="360dp"
+        android:layout_height="176dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/edrate_bordercolor"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="@string/rate_et"
+        android:inputType="text|textMultiLine|textCapSentences"
+        android:maxLength="200"
+        android:maxLines="7"
+        android:padding="10dp"
+        android:textCursorDrawable="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate_tv2"
+        app:layout_constraintVertical_bias="0.144" />
+
+    <TextView
+        android:id="@+id/rate_tv2"
+        android:layout_width="111dp"
+        android:layout_height="30dp"
+        android:text="@string/rate_tv2"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate_header"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="233dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="10dp"
+
+        android:numStars="5"
+        android:rating="1"
+        android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="@+id/rate_tv2"
+        app:layout_constraintStart_toEndOf="@+id/rate_tv2"
+        app:layout_constraintTop_toTopOf="@+id/rate_tv2" />
+
+    <ImageButton
+        android:id="@+id/rate_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <ImageButton
+        android:id="@+id/rate_rate"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="#00FFFFFF"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

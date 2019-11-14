@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotificationSubscribed"></activity>
+        <activity android:name=".Comment"></activity>
+        <activity android:name=".Rate" />
+        <activity android:name=".NotificationSubscribed" />
         <activity android:name=".NotificationRequestedRequest" />
         <activity android:name=".NotificationRequested" />
         <activity android:name=".Menu" />

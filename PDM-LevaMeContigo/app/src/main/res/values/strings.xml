@@ -17,4 +17,10 @@
     <string name="changepassword_password">Palavra-passe</string>
     <string name="changepassword_aleatory">Palavar-passe aleatória</string>
     <string name="changepassword_changepassword">Mudar Palavra-passe</string>
+
+    <string name="rate_tv1">Avaliar</string>
+    <string name="rate_tv2">Avaliação:</string>
+    <string name="rate_et">Escreva a sua avaliação (opcional)</string>
+    <string name="comment_tv">Comentar</string>
+    <string name="comment_et">Escreva o seu comentário.</string>
 </resources>
