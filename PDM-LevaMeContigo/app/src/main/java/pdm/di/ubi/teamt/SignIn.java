@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,13 +13,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity
 {
     private FirebaseAuth mFirebaseAuth = null;
-    private FirebaseUser mFirebaseUser = null;
-    //private FirebaseDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -86,6 +82,12 @@ public class SignIn extends AppCompatActivity
     public void HandleSignUp(View v)
     {
         Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
+    }
+
+    public void HandleSignInAnonimo(View v)
+    {
+        Intent intent = new Intent(this, MenuGuest.class);
         startActivity(intent);
     }
 }

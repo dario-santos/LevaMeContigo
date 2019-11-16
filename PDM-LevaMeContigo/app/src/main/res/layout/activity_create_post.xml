@@ -21,6 +21,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -34,6 +35,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleAddPost"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,15 +52,15 @@
         android:text="De:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.1" />
 
     <Spinner
         android:id="@+id/createpost_origem"
-        android:layout_width="149dp"
-        android:layout_height="25dp"
+        android:layout_width="180dp"
+        android:layout_height="27dp"
         android:layout_marginStart="20dp"
         android:entries="@array/destinos_origens"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
@@ -76,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <TextView
         android:id="@+id/textView10"
@@ -88,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <TextView
         android:id="@+id/textView11"
@@ -98,23 +100,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contrição:"
+        android:text="Contrapartidas:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <Spinner
         android:id="@+id/createpost_destino"
-        android:layout_width="151dp"
+        android:layout_width="180dp"
         android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:entries="@array/destinos_origens"
@@ -124,12 +126,12 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/createpost_constricao"
-        android:layout_width="wrap_content"
+        android:id="@+id/createpost_contrapartidas"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Tem que pagar 5 euros pela gasolina."
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,18 +152,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
 
-    <EditText
-        android:id="@+id/createpost_hora"
-        android:layout_width="153dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="4dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
-        app:layout_constraintVertical_bias="1.0" />
-
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
@@ -172,21 +162,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <Spinner
-        android:id="@+id/spinner7"
-        android:layout_width="41dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="4dp"
+        android:id="@+id/createpost_numpessoas"
+        android:layout_width="82dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="8dp"
+        android:entries="@array/numPessoas"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinner4"
-        android:layout_width="80dp"
+        android:id="@+id/createpost_day"
+        android:layout_width="85dp"
         android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:entries="@array/dias"
@@ -196,25 +187,48 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinner5"
-        android:layout_width="77dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="15dp"
+        android:id="@+id/createpost_year"
+        android:layout_width="105dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="5dp"
         android:entries="@array/ano"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner6"
-        app:layout_constraintStart_toEndOf="@+id/spinner6"
-        app:layout_constraintTop_toTopOf="@+id/spinner6"
+        app:layout_constraintBottom_toBottomOf="@+id/createpost_month"
+        app:layout_constraintStart_toEndOf="@+id/createpost_month"
+        app:layout_constraintTop_toTopOf="@+id/createpost_month"
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinner6"
-        android:layout_width="78dp"
+        android:id="@+id/createpost_month"
+        android:layout_width="85dp"
         android:layout_height="27dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="5dp"
         android:entries="@array/mes"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner4"
-        app:layout_constraintStart_toEndOf="@+id/spinner4"
-        app:layout_constraintTop_toTopOf="@+id/spinner4"
+        app:layout_constraintBottom_toBottomOf="@+id/createpost_day"
+        app:layout_constraintStart_toEndOf="@+id/createpost_day"
+        app:layout_constraintTop_toTopOf="@+id/createpost_day"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/createpost_hour"
+        android:layout_width="85dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="8dp"
+        android:entries="@array/hours"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/createpost_minutes"
+        android:layout_width="85dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="5dp"
+        android:entries="@array/minutes"
+        app:layout_constraintBottom_toBottomOf="@+id/createpost_hour"
+        app:layout_constraintStart_toEndOf="@+id/createpost_hour"
+        app:layout_constraintTop_toTopOf="@+id/createpost_hour"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

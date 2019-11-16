@@ -82,6 +82,8 @@
         android:id="@+id/signin_guest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="HandleSignInAnonimo"
         android:text="@string/signin_guest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

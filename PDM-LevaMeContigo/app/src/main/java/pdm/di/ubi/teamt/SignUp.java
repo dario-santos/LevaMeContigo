@@ -26,7 +26,6 @@ import java.text.SimpleDateFormat;
 
 import pdm.di.ubi.teamt.tables.User;
 
-// Criar o utilizador na base de dados
 public class SignUp extends AppCompatActivity
 {
     private FirebaseAuth mFirebaseAuth = null;
@@ -102,7 +101,7 @@ public class SignUp extends AppCompatActivity
         cal.add(Calendar.DATE, 1);
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
-        User newUser = new User(name.getText().toString(), 0, 0f, format1.format(cal.getTime()));
+        User newUser = new User(name.getText().toString(), 0, 5f, format1.format(cal.getTime()));
 
         DatabaseReference myRef = mDatabase.getReference("User");
 
@@ -143,5 +142,11 @@ public class SignUp extends AppCompatActivity
         }
 
         SignUp(email.getText().toString(), password.getText().toString());
+    }
+
+    public void HandleBack(View v)
+    {
+        Intent intent = new Intent(this, SignIn.class);
+        startActivity(intent);
     }
 }

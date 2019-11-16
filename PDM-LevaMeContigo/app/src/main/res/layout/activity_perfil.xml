@@ -12,6 +12,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -36,7 +37,6 @@
         android:id="@+id/perfil_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dário Santos"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,9 +59,8 @@
 
     <TextView
         android:id="@+id/perfil_viagens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="23"
+        android:layout_width="14dp"
+        android:layout_height="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
         app:layout_constraintEnd_toStartOf="@+id/perfil_avaliacao"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +80,6 @@
         android:id="@+id/perfil_avaliacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +100,6 @@
         android:id="@+id/perfil_anos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.2"
         app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/perfil_avaliacao"
@@ -129,12 +126,32 @@
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/ic_star" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="414dp"
-        android:layout_height="296dp"
-        android:background="#FFFFFF"
-        android:text="SCROLL VIEW AQUI"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="440dp" />
+    <ImageButton
+        android:id="@+id/perfil_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025"
+        app:srcCompat="@android:drawable/sym_call_outgoing" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="35dp"
+        android:background="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,9 @@ public class Publicacao
     private String destino;
     private int numPassageiros;
     private String contrapartidas;
+    private String idUser;
 
-    public Publicacao(String dia, String hora, String origem, String destino, int numPassageiros, String contrapartidas)
+    public Publicacao(String dia, String hora, String origem, String destino, int numPassageiros, String contrapartidas, String idUser)
     {
         this.dia = dia;
         this.hora = hora;
@@ -22,6 +23,7 @@ public class Publicacao
         this.destino = destino;
         this.numPassageiros = numPassageiros;
         this.contrapartidas = contrapartidas;
+        this.idUser = idUser;
     }
 
     @Exclude
@@ -34,6 +36,7 @@ public class Publicacao
         result.put("destino", this.destino);
         result.put("numPassageiros", this.numPassageiros);
         result.put("contrapartidas", this.contrapartidas);
+        result.put("idUser", this.idUser);
 
         return result;
     }
