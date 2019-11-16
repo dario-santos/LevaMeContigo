@@ -33,6 +33,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -58,6 +59,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/ic_profile_user"
+        android:onClick="HandleEnterProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -70,7 +72,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="António Costa"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/post_userimage"
         app:layout_constraintStart_toEndOf="@+id/post_userimage"
@@ -80,32 +81,32 @@
         android:id="@+id/post_origemdestino"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Porto -> Lisboa"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text=" -> "
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/post_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dia: 22/10/2019"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Dia:"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/post_origemdestino"
         app:layout_constraintTop_toBottomOf="@+id/post_origemdestino"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/post_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Hora: 14h35m"
+        android:text="Hora:"
         app:layout_constraintBottom_toBottomOf="@+id/post_data"
         app:layout_constraintStart_toEndOf="@+id/post_data"
         app:layout_constraintTop_toBottomOf="@+id/post_origemdestino"
@@ -115,26 +116,27 @@
         android:id="@+id/post_numeropassageiros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Número de passageiros: 5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Número de passageiros:"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/post_data"
         app:layout_constraintTop_toBottomOf="@+id/post_data"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <TextView
-        android:id="@+id/post_constricoes"
-        android:layout_width="304dp"
-        android:layout_height="55dp"
-        android:text="Constrições: Tem que pagar 5 euros pela gasolina"
+        android:id="@+id/post_contrapartidas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="Contrapartidas: "
         android:textAlignment="textStart"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/post_numeropassageiros"
         app:layout_constraintTop_toBottomOf="@+id/post_numeropassageiros"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/post_comentar"
@@ -159,20 +161,6 @@
         app:layout_constraintStart_toEndOf="@+id/post_comentar"
         app:layout_constraintTop_toTopOf="@+id/post_comentar" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="ScrollView"
-        app:layout_constraintBottom_toTopOf="@+id/post_action"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView21"
-        app:layout_constraintVertical_bias="0.0" />
-
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
@@ -193,9 +181,42 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
+        android:onClick="HandleInscrito"
         android:text="Enviar Pedido"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/post_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21">
+
+        <LinearLayout
+            android:id="@+id/post_llsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/post_delete"
+        android:layout_width="44dp"
+        android:layout_height="59dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.044"
+        app:srcCompat="@drawable/edrate_bordercolor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

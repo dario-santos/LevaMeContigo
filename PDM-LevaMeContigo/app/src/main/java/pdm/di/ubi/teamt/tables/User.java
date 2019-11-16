@@ -1,7 +1,5 @@
 package pdm.di.ubi.teamt.tables;
 
-import android.content.Intent;
-
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;

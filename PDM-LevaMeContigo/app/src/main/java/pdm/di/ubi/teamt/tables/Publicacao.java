@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Publicacao
 {
-    private String dia;
+    private String data;
     private String hora;
     private String origem;
     private String destino;
@@ -15,9 +15,11 @@ public class Publicacao
     private String contrapartidas;
     private String idUser;
 
-    public Publicacao(String dia, String hora, String origem, String destino, int numPassageiros, String contrapartidas, String idUser)
+    public Publicacao() {}
+
+    public Publicacao(String data, String hora, String origem, String destino, int numPassageiros, String contrapartidas, String idUser)
     {
-        this.dia = dia;
+        this.data = data;
         this.hora = hora;
         this.origem = origem;
         this.destino = destino;
@@ -26,11 +28,46 @@ public class Publicacao
         this.idUser = idUser;
     }
 
+    public String getData()
+    {
+        return data;
+    }
+
+    public String getHora()
+    {
+        return hora;
+    }
+
+    public String getOrigem()
+    {
+        return origem;
+    }
+
+    public String getDestino()
+    {
+        return destino;
+    }
+
+    public int getNumPassageiros()
+    {
+        return numPassageiros;
+    }
+
+    public String getContrapartidas()
+    {
+        return contrapartidas;
+    }
+
+    public String getIdUser()
+    {
+        return idUser;
+    }
+
     @Exclude
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("dia", this.dia);
+        result.put("data", this.data);
         result.put("hora", this.hora);
         result.put("origem", this.origem);
         result.put("destino", this.destino);

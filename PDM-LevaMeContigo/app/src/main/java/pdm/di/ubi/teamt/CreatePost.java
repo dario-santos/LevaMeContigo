@@ -131,13 +131,19 @@ public class CreatePost extends AppCompatActivity
 
         contrapartidas = contrapartidas.isEmpty() ? " " : contrapartidas;
 
-        Publicacao newPost = new Publicacao(origem, destino, date, hours, numeroPessoas, contrapartidas, idUser);
+
+        Publicacao newPost = new Publicacao(date, hours, origem, destino, numeroPessoas, contrapartidas, idUser);
 
         String key = mDatabase.child("posts").push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Post/" + key, newPost.toMap());
 
         mDatabase.updateChildren(childUpdates);
+
+        Toast.makeText(CreatePost.this, "Publicação adicionada com sucesso.",
+                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Menu.class);
+        startActivity(intent);
     }
 
     public void HandleBack(View v)

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/postline_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/postline_userprofile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/postline_userprofile"
+        app:layout_constraintTop_toTopOf="@+id/postline_userprofile"
+        app:srcCompat="@color/PerfilBackGround" />
+
+    <ImageButton
+        android:id="@+id/postline_userprofile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_profile_user" />
+
+    <TextView
+        android:id="@+id/postline_origemdestino"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Origem -> Destino"
+        app:layout_constraintBottom_toBottomOf="@+id/postline_userprofile"
+        app:layout_constraintStart_toEndOf="@+id/postline_userprofile"
+        app:layout_constraintTop_toTopOf="@+id/postline_background"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <TextView
+        android:id="@+id/postline_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Dia: dd/MM/YYYY"
+        app:layout_constraintBottom_toBottomOf="@+id/postline_background"
+        app:layout_constraintStart_toStartOf="@+id/postline_origemdestino"
+        app:layout_constraintTop_toBottomOf="@+id/postline_origemdestino" />
+
+    <TextView
+        android:id="@+id/postline_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="Hora: hh:mm"
+        app:layout_constraintBottom_toBottomOf="@+id/postline_data"
+        app:layout_constraintStart_toEndOf="@+id/postline_data"
+        app:layout_constraintTop_toTopOf="@+id/postline_data" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="    "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/postline_userprofile"
+        app:layout_constraintTop_toBottomOf="@+id/postline_hora" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
