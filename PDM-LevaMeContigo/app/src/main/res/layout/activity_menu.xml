@@ -10,14 +10,14 @@
         android:id="@+id/imageView7"
         android:layout_width="413dp"
         android:layout_height="72dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_perfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/PerfilBackGround" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/menu_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_profile_user"
@@ -41,18 +41,20 @@
         app:srcCompat="@android:drawable/ic_menu_help" />
 
     <SearchView
+        android:id="@+id/menu_search"
         android:layout_width="249dp"
         android:layout_height="31dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_perfil"
         app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+        app:layout_constraintStart_toEndOf="@+id/menu_perfil"
+        app:layout_constraintTop_toTopOf="@+id/menu_perfil" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="HandleCreatePost"
         android:text="Adicionar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

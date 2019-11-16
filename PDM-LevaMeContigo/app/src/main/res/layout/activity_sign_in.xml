@@ -8,17 +8,17 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="136dp"
+        android:layout_height="141dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintVertical_bias="0.1"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <EditText
-        android:id="@+id/changepassword_email"
+        android:id="@+id/signin_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -28,10 +28,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.12" />
 
     <EditText
-        android:id="@+id/changepassword_password"
+        android:id="@+id/signin_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -40,18 +40,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepassword_email"
+        app:layout_constraintTop_toBottomOf="@+id/signin_email"
         app:layout_constraintVertical_bias="0.025" />
 
     <Button
-        android:id="@+id/changepassword_aleatory"
+        android:id="@+id/signin_entrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="HandleSignIn"
         android:text="@string/signin_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepassword_password"
+        app:layout_constraintTop_toBottomOf="@+id/signin_password"
         app:layout_constraintVertical_bias="0.15" />
 
     <TextView
@@ -62,13 +63,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changepassword_aleatory"
+        app:layout_constraintTop_toBottomOf="@+id/signin_entrar"
         app:layout_constraintVertical_bias="0.12" />
 
     <Button
         android:id="@+id/signin_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="HandleSignUp"
         android:text="@string/signin_signup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

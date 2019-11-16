@@ -23,8 +23,7 @@
         <activity android:name=".Perfil" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".SignUp" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
