@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import pdm.di.ubi.teamt.tables.User;
 
@@ -97,11 +98,10 @@ public class SignUp extends AppCompatActivity
         EditText name = findViewById(R.id.signup_name);
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-        User newUser = new User(name.getText().toString(), 0, 5f, format1.format(cal.getTime()));
+        User newUser = new User(name.getText().toString(), 0, 5f, df.format(c));
 
         DatabaseReference myRef = mDatabase.getReference("User");
 

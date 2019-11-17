@@ -5,7 +5,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,8 +18,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import pdm.di.ubi.teamt.tables.Publicacao;
 
@@ -54,9 +58,6 @@ public class Menu extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                if(!dataSnapshot.exists())
-                    return;
-
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Publicacao post = value.getValue(Publicacao.class);
@@ -70,8 +71,16 @@ public class Menu extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         };
 
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String s = df.format(c);
+        String a = df.format(c);
+
+
         DatabaseReference postRef = mDatabase.child("Post");
-        postRef.addValueEventListener(valueEventListener);
+        postRef.orderByChild("data").startAt(a).addValueEventListener(valueEventListener);
     }
 
     private void ShowPostsToUser()

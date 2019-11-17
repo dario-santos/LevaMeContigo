@@ -19,6 +19,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -100,17 +101,17 @@ public class Perfil extends AppCompatActivity
 
     private float DateDifference(String firstDate)
     {
-        Date date = new Date();
-        String secondDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String secondDate = df.format(c);
+
         long diff = 0;
-        try {
-
-
-            long diffInMillies = Math.abs(sdf.parse(firstDate).getTime() - sdf.parse(secondDate).getTime());
+        try
+        {
+            long diffInMillies = Math.abs(df.parse(firstDate).getTime() - df.parse(secondDate).getTime());
             diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
         }
         catch (Exception e){}
 

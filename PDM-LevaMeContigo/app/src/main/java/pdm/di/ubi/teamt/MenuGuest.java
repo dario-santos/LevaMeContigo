@@ -17,7 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import pdm.di.ubi.teamt.tables.Publicacao;
 
@@ -59,8 +62,17 @@ public class MenuGuest extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         };
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 7);
+        String endDate = sdf.format(cal.getTime());
+
+        Date today = Calendar.getInstance().getTime();
+        String todayDate = sdf.format(today);
+
         DatabaseReference postRef = mDatabase.child("Post");
-        postRef.addValueEventListener(valueEventListener);
+        postRef.orderByChild("data").startAt(todayDate).endAt(endDate).addValueEventListener(valueEventListener);
     }
 
     private void ShowPostsToUser()

@@ -24,7 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -112,10 +115,13 @@ public class Post extends AppCompatActivity
                 }
                 if(pub.getIdUser().equals(mFirebaseUser.getUid()))
                 {
-                    ImageButton delete = findViewById(R.id.post_delete);
-                    ImageButton edit = findViewById(R.id.post_edit);
-                    delete.setVisibility(View.VISIBLE);
-                    edit.setVisibility(View.VISIBLE);
+                    if(canUserDeleteEditPost())
+                    {
+                        ImageButton delete = findViewById(R.id.post_delete);
+                        ImageButton edit = findViewById(R.id.post_edit);
+                        delete.setVisibility(View.VISIBLE);
+                        edit.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -124,6 +130,16 @@ public class Post extends AppCompatActivity
         };
         Query query = myRef.orderByKey().equalTo(idPost);
         query.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    private boolean canUserDeleteEditPost()
+    {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String secondDate = df.format(c);
+
+        long differenceInDays = DateUtil.getDateDifferenceInDays(pub.getData(), secondDate);
+        return differenceInDays >= 3;
     }
 
     private void GetInscritoFromDB(final String idUser)
@@ -135,9 +151,6 @@ public class Post extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                if(!dataSnapshot.exists())
-                    return;
-
                 if(pub.getIdUser().equals(mFirebaseUser.getUid()))
                     return;
 
@@ -247,6 +260,27 @@ public class Post extends AppCompatActivity
     {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Comentario");
 
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot)
+            {
+                for(DataSnapshot value : snapshot.getChildren())
+                {
+                    Comentario c = value.getValue(Comentario.class);
+                    if(c.getIdPub().equals(pubId))
+                        value.getRef().removeValue();
+                }
+                DeleteInscritosFromDB();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+
+    private void DeleteInscritosFromDB()
+    {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Inscrito");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot)
