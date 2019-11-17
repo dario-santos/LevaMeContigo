@@ -5,21 +5,23 @@ import com.google.firebase.database.Exclude;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Comentario
+public class Avaliar
 {
     String idUser;
     String userName;
     String idPub;
     String comentario;
+    float nota;
 
-    public Comentario() {}
+    public Avaliar() {}
 
-    public Comentario(String idUser, String userName, String idPub, String comentario)
+    public Avaliar(String idUser, String userName, String idPub, String comentario, float nota)
     {
         this.idUser = idUser;
         this.userName = userName;
         this.idPub = idPub;
         this.comentario = comentario;
+        this.nota = nota;
     }
 
 
@@ -44,6 +46,11 @@ public class Comentario
         return comentario;
     }
 
+    public float getNota()
+    {
+        return nota;
+    }
+
     @Exclude
     public Map<String, Object> toMap()
     {
@@ -52,6 +59,7 @@ public class Comentario
         result.put("userName", this.userName);
         result.put("idPub", this.idPub);
         result.put("comentario", this.comentario);
+        result.put("nota", this.nota);
 
         return result;
     }

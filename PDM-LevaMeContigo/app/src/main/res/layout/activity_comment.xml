@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.003" />
 
     <EditText
-        android:id="@+id/commment_et"
+        android:id="@+id/comment_text"
         android:layout_width="360dp"
         android:layout_height="227dp"
 
@@ -66,6 +66,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -75,10 +76,11 @@
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <ImageButton
-        android:id="@+id/comment_next"
+        android:id="@+id/comment_comment"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleAddComment"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

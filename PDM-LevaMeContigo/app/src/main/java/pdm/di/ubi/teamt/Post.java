@@ -2,11 +2,16 @@ package pdm.di.ubi.teamt;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +24,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pdm.di.ubi.teamt.tables.Comentario;
 import pdm.di.ubi.teamt.tables.Inscrito;
 import pdm.di.ubi.teamt.tables.Publicacao;
 import pdm.di.ubi.teamt.tables.User;
@@ -33,8 +38,12 @@ public class Post extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
+
     private Publicacao pub = null;
     private String pubId = null;
+
+    private ArrayList<Comentario> comentarios = new ArrayList<>();
+    private ArrayList<Integer> idUsers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,8 +62,7 @@ public class Post extends AppCompatActivity
         GetPostFromDB(pubId);
 
         GetInscritoFromDB(mFirebaseUser.getUid());
-
-        // Todo: O utilizador está inscrito?
+        ReadComentariosFromDB();
     }
 
     private void GetUserFromDB(String idUser) {
@@ -101,6 +109,13 @@ public class Post extends AppCompatActivity
                     pub = value.getValue(Publicacao.class);
                     UpdateGUI(pub);
                     GetUserFromDB(pub.getIdUser());
+                }
+                if(pub.getIdUser().equals(mFirebaseUser.getUid()))
+                {
+                    ImageButton delete = findViewById(R.id.post_delete);
+                    ImageButton edit = findViewById(R.id.post_edit);
+                    delete.setVisibility(View.VISIBLE);
+                    edit.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -167,6 +182,99 @@ public class Post extends AppCompatActivity
         oContrapartidas.setText("Contrapartidas: " + tmp);
     }
 
+    private void ReadComentariosFromDB()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if(!dataSnapshot.exists())
+                    return;
+
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    Comentario comentario = value.getValue(Comentario.class);
+                    if(comentario.getIdPub().equals(pubId))
+                        comentarios.add(comentario);
+                }
+
+                ShowComentariosToUser();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        DatabaseReference postRef = mDatabase.child("Comentario");
+        postRef.addValueEventListener(valueEventListener);
+    }
+
+    private void ShowComentariosToUser()
+    {
+        LinearLayout oLL = findViewById(R.id.post_llsv);
+
+        for(int i = 0 ; i < comentarios.size() ; i++)
+        {
+            ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.comment_line, null);
+            oCL1.setId(View.generateViewId());
+
+            ImageView userProfile = oCL1.findViewById(R.id.comment_line_userprofile);
+            userProfile.setClickable(true);
+            userProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view)
+                {
+                    HandleEnterProfile(view);
+                }
+            });
+            userProfile.setId(View.generateViewId());
+            idUsers.add(userProfile.getId());
+
+            TextView nome = oCL1.findViewById(R.id.comment_line_username);
+            nome.setText(comentarios.get(i).getUserName());
+            nome.setId(View.generateViewId());
+
+            TextView text = oCL1.findViewById(R.id.comment_line_text);
+            text.setText(comentarios.get(i).getComentario());
+            text.setId(View.generateViewId());
+
+            oLL.addView(oCL1);
+        }
+    }
+
+    private void DeleteComentariosFromDB()
+    {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Comentario");
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot)
+            {
+                for(DataSnapshot value : snapshot.getChildren())
+                {
+                    Comentario c = value.getValue(Comentario.class);
+                    if(c.getIdPub().equals(pubId))
+                        value.getRef().removeValue();
+                }
+                ReturnToMenu();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+
+    private void ReturnToMenu()
+    {
+        DatabaseReference myRef = mDatabase.child("Post/"+ pubId);
+        myRef.removeValue();
+
+        Intent intent = new Intent(this, Menu.class);
+        startActivity(intent);
+
+    }
+
     public void HandleBack(View v)
     {
         Intent intent = new Intent(this, Menu.class);
@@ -194,5 +302,25 @@ public class Post extends AppCompatActivity
 
         Toast.makeText(Post.this, "Pedido enviado",
                 Toast.LENGTH_SHORT).show();
+    }
+
+    public void HandleAddComment(View v)
+    {
+        Intent intent = new Intent(this, Comment.class);
+        intent.putExtra("idPub", pubId);
+        startActivity(intent);
+    }
+
+    public void HandleRateUser(View v)
+    {
+        Intent intent = new Intent(this, Rate.class);
+        intent.putExtra("idUser", pub.getIdUser());
+        intent.putExtra("idPub", pubId);
+        startActivity(intent);
+    }
+
+    public void HandleDeletePost(View v)
+    {
+        DeleteComentariosFromDB();
     }
 }
