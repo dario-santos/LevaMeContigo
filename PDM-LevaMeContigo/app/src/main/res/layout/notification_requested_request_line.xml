@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/requested_request_line_background"
+        android:layout_width="390dp"
+        android:layout_height="186dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/PerfilBackGround" />
+
+    <TextView
+        android:id="@+id/request_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Aceita que este utilizador se junte à sua boleira?"
+        app:layout_constraintEnd_toEndOf="@+id/requested_request_line_background"
+        app:layout_constraintStart_toStartOf="@+id/requested_request_line_background"
+        app:layout_constraintTop_toBottomOf="@+id/requested_request_username" />
+
+    <TextView
+        android:id="@+id/requested_request_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dário Santos"
+        app:layout_constraintEnd_toEndOf="@+id/requested_request_useravatar"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="@+id/requested_request_useravatar"
+        app:layout_constraintTop_toBottomOf="@+id/requested_request_useravatar" />
+
+    <Button
+        android:id="@+id/requested_request_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sim"
+        app:layout_constraintEnd_toStartOf="@+id/requested_request_reject"
+        app:layout_constraintStart_toStartOf="@+id/requested_request_line_background"
+        app:layout_constraintTop_toTopOf="@+id/requested_request_reject" />
+
+    <Button
+        android:id="@+id/requested_request_reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Não"
+        app:layout_constraintBottom_toBottomOf="@+id/requested_request_line_background"
+        app:layout_constraintEnd_toEndOf="@+id/requested_request_line_background"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="@+id/requested_request_line_background"
+        app:layout_constraintTop_toBottomOf="@+id/request_tv" />
+
+    <ImageView
+        android:id="@+id/requested_request_useravatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/requested_request_line_background"
+        app:layout_constraintStart_toStartOf="@+id/requested_request_line_background"
+        app:layout_constraintTop_toTopOf="@+id/requested_request_line_background"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_profile_user" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

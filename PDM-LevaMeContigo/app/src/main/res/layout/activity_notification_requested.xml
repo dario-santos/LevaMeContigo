@@ -21,6 +21,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -45,6 +46,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="HandleNotificationSubscribed"
         android:text="Inscritos"
         android:textAlignment="textStart"
         android:textSize="18sp"
@@ -77,6 +79,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/notification_requested_llsv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

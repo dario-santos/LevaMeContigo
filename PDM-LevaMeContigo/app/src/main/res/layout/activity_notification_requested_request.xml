@@ -21,6 +21,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -77,6 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageView9">
 
         <LinearLayout
+            android:id="@+id/notification_requested_request_llsv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

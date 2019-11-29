@@ -90,7 +90,6 @@ public class Menu extends AppCompatActivity
 
         for(int i = 0 ; i < posts.size() ; i++)
         {
-
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
 
@@ -158,7 +157,6 @@ public class Menu extends AppCompatActivity
         Intent intent = new Intent(this, Perfil.class);
         intent.putExtra("idUser", posts.get(i).getIdUser());
         startActivity(intent);
-
     }
 
     public void HandleEnterPost(View v)
@@ -167,6 +165,18 @@ public class Menu extends AppCompatActivity
 
         Intent intent = new Intent(this, Post.class);
         intent.putExtra("idPub", postIds.get(i));
+        startActivity(intent);
+    }
+
+    public void HandleEnterNotification(View v)
+    {
+        Intent intent = new Intent(this, NotificationSubscribed.class);
+        startActivity(intent);
+    }
+
+    public void HandleEnterSearch(View v)
+    {
+        Intent intent = new Intent(this, Search.class);
         startActivity(intent);
     }
 }

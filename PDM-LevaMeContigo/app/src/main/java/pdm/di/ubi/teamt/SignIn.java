@@ -61,6 +61,7 @@ public class SignIn extends AppCompatActivity
     {
         EditText email = findViewById(R.id.signin_email);
         EditText password = findViewById(R.id.signin_password);
+
         if(email.getText().toString().isEmpty())
         {
             Toast.makeText(SignIn.this, "Erro: Necessita de introduzir um email.",

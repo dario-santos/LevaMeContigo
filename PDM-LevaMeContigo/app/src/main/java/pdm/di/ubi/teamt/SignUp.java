@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -112,6 +113,13 @@ public class SignUp extends AppCompatActivity
     {
         Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
+    }
+
+    public void HandleRandomPassowrd(View v)
+    {
+        TextView password = findViewById(R.id.signup_randompassword);
+        password.setText("Palavra-passe: " + Password.Generate(7));
+        password.setVisibility(View.VISIBLE);
     }
 
     public void HandleSignUp(View v)

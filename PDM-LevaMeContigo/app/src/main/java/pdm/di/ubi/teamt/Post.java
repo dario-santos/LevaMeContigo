@@ -45,7 +45,8 @@ public class Post extends AppCompatActivity
     private String pubId = null;
 
     private ArrayList<Comentario> comentarios = new ArrayList<>();
-    private ArrayList<Integer> idUsers = new ArrayList<>();
+    private ArrayList<Integer> buttonsIdUsers = new ArrayList<>();
+    private String inscritoKey = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -158,7 +159,13 @@ public class Post extends AppCompatActivity
                     Inscrito inscrito = value.getValue(Inscrito.class);
 
                     if(inscrito.getIdPub().equals(pubId))
+                    {
+                        inscritoKey = value.getKey();
+
+                        Button cancelarConvite = findViewById(R.id.post_cancelarconvite);
+                        cancelarConvite.setVisibility(View.VISIBLE);
                         return;
+                    }
                 }
 
                 Button sendInvite = findViewById(R.id.post_action);
@@ -201,25 +208,12 @@ public class Post extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                if(!dataSnapshot.exists())
-                    return;
-
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Comentario comentario = value.getValue(Comentario.class);
-                    if(comentario.getIdPub().equals(pubId))
-                    {
-                        boolean isAdded = false;
-                        for(Comentario c : comentarios)
-                            if(c.equals(comentario))
-                            {
-                                isAdded = true;
-                                break;
-                            }
 
-                        if(!isAdded)
-                            comentarios.add(comentario);
-                    }
+                    if(comentario.getIdPub().equals(pubId))
+                        comentarios.add(comentario);
                 }
 
                 ShowComentariosToUser();
@@ -248,11 +242,11 @@ public class Post extends AppCompatActivity
                 @Override
                 public void onClick(View view)
                 {
-                    HandleEnterProfile(view);
+                    HandleEnterCommentProfile(view);
                 }
             });
             userProfile.setId(View.generateViewId());
-            idUsers.add(userProfile.getId());
+            buttonsIdUsers.add(userProfile.getId());
 
             TextView nome = oCL1.findViewById(R.id.comment_line_username);
             nome.setText(comentarios.get(i).getUserName());
@@ -332,20 +326,44 @@ public class Post extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void HandleEnterCommentProfile(View v)
+    {
+        int i = buttonsIdUsers.indexOf(v.getId());
+
+        Intent intent = new Intent(this, Perfil.class);
+        intent.putExtra("idUser", comentarios.get(i).getIdUser());
+        startActivity(intent);
+    }
+
     public void HandleInscrito(View v)
     {
         v.setVisibility(View.INVISIBLE);
 
-        Inscrito newPost = new Inscrito(mFirebaseUser.getUid(), pubId);
+        Inscrito newPost = new Inscrito(mFirebaseUser.getUid(), pubId, false);
 
         String key = mDatabase.child("Inscrito").push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Inscrito/" + key, newPost.toMap());
+        inscritoKey = key;
 
         mDatabase.updateChildren(childUpdates);
 
         Toast.makeText(Post.this, "Pedido enviado",
                 Toast.LENGTH_SHORT).show();
+
+        Button cancelarConvite = findViewById(R.id.post_cancelarconvite);
+        cancelarConvite.setVisibility(View.VISIBLE);
+    }
+
+    public void HandleCancelarInscricao(View v)
+    {
+        v.setVisibility(View.INVISIBLE);
+
+        DatabaseReference myRef = mDatabase.child("Inscrito/" + inscritoKey);
+        myRef.removeValue();
+
+        Button enviarConvite = findViewById(R.id.post_action);
+        enviarConvite.setVisibility(View.VISIBLE);
     }
 
     public void HandleAddComment(View v)

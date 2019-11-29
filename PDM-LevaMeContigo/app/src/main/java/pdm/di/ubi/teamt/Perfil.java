@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -158,6 +159,16 @@ public class Perfil extends AppCompatActivity
     public void HandleBack(View v)
     {
         Intent intent = new Intent(this, Menu.class);
+        startActivity(intent);
+    }
+
+    public void HandleLogout(View v)
+    {
+        mFirebaseAuth.signOut();
+
+        Toast.makeText(this, "Adeus!", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
     }
 }

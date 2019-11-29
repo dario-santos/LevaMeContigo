@@ -54,8 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
-        app:layout_constraintVertical_bias="0.388" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <EditText
         android:id="@+id/signup_name"
@@ -70,18 +69,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.15" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CheckBox"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/signup_password"
-        app:layout_constraintTop_toBottomOf="@+id/signup_password"
-        app:layout_constraintVertical_bias="0.056" />
-
     <ImageButton
         android:id="@+id/signup_back"
         android:layout_width="45dp"
@@ -95,5 +82,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025"
         app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="HandleRandomPassowrd"
+        android:text="Gerar palavra-passe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_randompassword"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/signup_randompassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Palavra-passe:"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_password"
+        app:layout_constraintVertical_bias="0.05" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
