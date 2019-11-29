@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import pdm.di.ubi.teamt.tables.Publicacao;
 import pdm.di.ubi.teamt.tables.User;
 
 public class Perfil extends AppCompatActivity
@@ -30,6 +31,8 @@ public class Perfil extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
+
+    private int numberOfBoleias = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +47,7 @@ public class Perfil extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        numberOfBoleias = 0;
 
         if(idUser != null && mFirebaseUser != null)
         {
@@ -53,9 +57,43 @@ public class Perfil extends AppCompatActivity
                 logout.setVisibility(View.VISIBLE);
             }
 
-            GetUserFromDB(idUser);
+            GetNumberOfPubFromDB(idUser);
         }
     }
+
+    private void GetNumberOfPubFromDB(final String idUser)
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    Publicacao pub = value.getValue(Publicacao.class);
+                    if(pub.getIdUser().equals(idUser))
+                        numberOfBoleias++;
+                }
+
+                GetUserFromDB(idUser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String s = df.format(c);
+        String a = df.format(c);
+
+
+        DatabaseReference postRef = mDatabase.child("Post");
+        postRef.orderByChild("data").endAt(a).addValueEventListener(valueEventListener);
+    }
+
 
     private void GetUserFromDB(String idUser)
     {
@@ -93,7 +131,7 @@ public class Perfil extends AppCompatActivity
         TextView anos = findViewById(R.id.perfil_anos);
 
         username.setText(user.getNome());
-        viagens.setText(Integer.toString(user.getNumViagens()));
+        viagens.setText(Integer.toString(numberOfBoleias));
         nota.setText(Float.toString(user.getNota()));
         anos.setText(String.format("%.1f", DateDifference(user.getDataInscricao())));
     }

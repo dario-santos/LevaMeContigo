@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import pdm.di.ubi.teamt.tables.Avaliar;
 import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class Menu extends AppCompatActivity
