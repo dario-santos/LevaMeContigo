@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -209,7 +208,18 @@ public class Post extends AppCompatActivity
                 {
                     Comentario comentario = value.getValue(Comentario.class);
                     if(comentario.getIdPub().equals(pubId))
-                        comentarios.add(comentario);
+                    {
+                        boolean isAdded = false;
+                        for(Comentario c : comentarios)
+                            if(c.equals(comentario))
+                            {
+                                isAdded = true;
+                                break;
+                            }
+
+                        if(!isAdded)
+                            comentarios.add(comentario);
+                    }
                 }
 
                 ShowComentariosToUser();

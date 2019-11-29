@@ -31,8 +31,7 @@ public class SignIn extends AppCompatActivity
     private void SignIn(String email, String password)
     {
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
-                {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {

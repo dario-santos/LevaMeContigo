@@ -19,13 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
+import pdm.di.ubi.teamt.tables.Avaliar;
 import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class Menu extends AppCompatActivity
@@ -61,6 +59,10 @@ public class Menu extends AppCompatActivity
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Publicacao post = value.getValue(Publicacao.class);
+
+                    if(postIds.contains(value.getKey()))
+                        continue;
+
                     posts.add(post);
                     postIds.add(value.getKey());
                 }
