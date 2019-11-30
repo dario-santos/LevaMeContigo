@@ -37,10 +37,14 @@ public class NotificationRequestedRequest extends AppCompatActivity
 
     private ArrayList<Inscrito> inscritos = new ArrayList<>();
     private ArrayList<String> inscritoIds = new ArrayList<>();
+    private ArrayList<String> publishedInscritoKeys = new ArrayList<>();
+
+
     private ArrayList<String> userIds = new ArrayList<>();
     private ArrayList<User> users = new ArrayList<>();
 
     private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
+
     private ArrayList<Integer> buttonsResponseAcceptIds = new ArrayList<>();
     private ArrayList<Integer> buttonsResponseRejectIds = new ArrayList<>();
 
@@ -152,6 +156,11 @@ public class NotificationRequestedRequest extends AppCompatActivity
 
         for(int i = 0 ; i < inscritos.size() ; i++)
         {
+            if(publishedInscritoKeys.contains(inscritoIds.get(i)))
+                continue;
+
+            publishedInscritoKeys.add(inscritoIds.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_requested_request_line, null);
             oCL1.setId(View.generateViewId());
 
@@ -223,14 +232,14 @@ public class NotificationRequestedRequest extends AppCompatActivity
         String inscrKey = inscritoIds.get(i);
 
         mDatabase.child("Inscrito/" + inscrKey + "/accepted").setValue(true);
-        ResetActivity();
+
+        //Todo: Atualizar a UI
     }
 
     public void HandleRejectInscrito(View v)
     {
         int i = buttonsResponseRejectIds.indexOf(v.getId());
         String inscrKey = inscritoIds.get(i);
-
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override

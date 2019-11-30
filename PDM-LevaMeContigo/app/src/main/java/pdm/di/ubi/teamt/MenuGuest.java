@@ -24,8 +24,11 @@ import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class MenuGuest extends AppCompatActivity
 {
-    private ArrayList<Publicacao> posts = new ArrayList<>();
     private DatabaseReference mDatabase = null;
+
+    private ArrayList<Publicacao> posts = new ArrayList<>();
+    private ArrayList<String> pubKeys = new ArrayList<>();
+    private ArrayList<String> publishedPubKeys = new ArrayList<>();
 
     // Number of days that the user can see ads from now
     private int numberOfDays = 7;
@@ -38,23 +41,24 @@ public class MenuGuest extends AppCompatActivity
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        ReadPostsFromDataBase();
+        GetPubsFromDB();
     }
 
-    private void ReadPostsFromDataBase()
+    private void GetPubsFromDB()
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                if(!dataSnapshot.exists())
-                    return;
-
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
-                    Publicacao post = value.getValue(Publicacao.class);
-                    posts.add(post);
+                    if(!pubKeys.contains(value.getKey()))
+                    {
+                        Publicacao pub = value.getValue(Publicacao.class);
+                        pubKeys.add(value.getKey());
+                        posts.add(pub);
+                    }
                 }
                 ShowPostsToUser();
             }
@@ -83,6 +87,11 @@ public class MenuGuest extends AppCompatActivity
 
         for(int i = 0 ; i < posts.size() ; i++)
         {
+            if(publishedPubKeys.contains(pubKeys.get(i)))
+                continue;
+
+            publishedPubKeys.add(pubKeys.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menuguest_line,
                     null);
             oCL1.setId(View.generateViewId());
@@ -99,6 +108,7 @@ public class MenuGuest extends AppCompatActivity
     {
         Intent intent = new Intent(this, SignUp.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         startActivity(intent);
     }
 }

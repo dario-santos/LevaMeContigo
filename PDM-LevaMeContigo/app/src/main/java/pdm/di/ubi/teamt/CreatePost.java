@@ -21,8 +21,8 @@ import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class CreatePost extends AppCompatActivity
 {
-    private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
+    private FirebaseUser mFirebaseUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,12 +30,11 @@ public class CreatePost extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
-        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
-    private boolean VerifyData(String origem, String destino, String dia, String mes, String ano
+    private boolean IsDataCorrect(String origem, String destino, String dia, String mes, String ano
             , String horas, String minutos, String numPessoas)
     {
         if(origem.isEmpty())
@@ -114,15 +113,13 @@ public class CreatePost extends AppCompatActivity
         String numPessoas = oNumPessoas.getSelectedItem().toString();
         String contrapartidas = oContrapartidas.getText().toString();
 
-        // Verificar os dados
-        if(!VerifyData(origem, destino, dia, mes, ano, horas, minutos, numPessoas))
+        if(!IsDataCorrect(origem, destino, dia, mes, ano, horas, minutos, numPessoas))
             return;
 
         if(mFirebaseUser == null)
             return;
 
         String idUser = mFirebaseUser.getUid();
-
         String date = ano + "-" + mes + "-" + dia;
         String hours = horas + ":" + minutos;
         int numeroPessoas = Integer.parseInt(numPessoas);
@@ -130,26 +127,30 @@ public class CreatePost extends AppCompatActivity
         contrapartidas = contrapartidas.isEmpty() ? " " : contrapartidas;
 
 
-        Publicacao newPost = new Publicacao(date, hours, origem, destino, numeroPessoas, contrapartidas, idUser);
+        Publicacao newPub = new Publicacao(date, hours, origem, destino, numeroPessoas, contrapartidas, idUser);
 
         String key = mDatabase.child("posts").push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/Post/" + key, newPost.toMap());
+        childUpdates.put("/Post/" + key, newPub.toMap());
 
         mDatabase.updateChildren(childUpdates);
 
         Toast.makeText(CreatePost.this, "Publicação adicionada com sucesso.",
                 Toast.LENGTH_SHORT).show();
 
+        ReturnToMenu();
+    }
+
+    private void ReturnToMenu()
+    {
         Intent intent = new Intent(this, Menu.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         startActivity(intent);
     }
 
     public void HandleBack(View v)
     {
-        Intent intent = new Intent(this, Menu.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        ReturnToMenu();
     }
 }

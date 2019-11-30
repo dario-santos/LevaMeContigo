@@ -33,6 +33,8 @@ public class NotificationSubscribed extends AppCompatActivity
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
     private ArrayList<String> pubIds = new ArrayList<>();
+    private ArrayList<String> publishedPubKeys = new ArrayList<>();
+
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
 
     ArrayList<String> inscritos = new ArrayList<>();
@@ -121,6 +123,9 @@ public class NotificationSubscribed extends AppCompatActivity
                     if(avaliacoes.contains(value.getKey()))
                         continue;
 
+                    if(pubIds.contains(value.getKey()))
+                        continue;
+
                     Publicacao post = value.getValue(Publicacao.class);
 
                     pubs.add(post);
@@ -144,6 +149,11 @@ public class NotificationSubscribed extends AppCompatActivity
 
         for(int i = 0 ; i < pubs.size() ; i++)
         {
+            if(publishedPubKeys.contains(pubIds.get(i)))
+                continue;
+
+            publishedPubKeys.add(pubIds.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_subscribed_line, null);
             oCL1.setId(View.generateViewId());
 

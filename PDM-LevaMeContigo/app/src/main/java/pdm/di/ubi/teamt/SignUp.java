@@ -133,6 +133,12 @@ public class SignUp extends AppCompatActivity
                     Toast.LENGTH_SHORT).show();
             return;
         }
+        if(!Email.IsValid(email.getText().toString()))
+        {
+            Toast.makeText(SignUp.this, "Erro: Necessita de introduzir um email da UBI.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if(password.getText().toString().isEmpty())
         {

@@ -28,7 +28,9 @@ public class NotificationRequested extends AppCompatActivity
     private DatabaseReference mDatabase = null;
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
-    private ArrayList<String> pubIds = new ArrayList<>();
+    private ArrayList<String> pubKeys = new ArrayList<>();
+    private ArrayList<String> publishedPubKeys = new ArrayList<>();
+
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
 
     @Override
@@ -52,12 +54,15 @@ public class NotificationRequested extends AppCompatActivity
             {
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
+                    if(pubKeys.contains(value.getKey()))
+                        continue;
+
                     Publicacao pub = value.getValue(Publicacao.class);
 
                     if(idUser.equals(pub.getIdUser()))
                     {
                         pubs.add(pub);
-                        pubIds.add(value.getKey());
+                        pubKeys.add(value.getKey());
                     }
                 }
 
@@ -78,6 +83,11 @@ public class NotificationRequested extends AppCompatActivity
 
         for(int i = 0 ; i < pubs.size() ; i++)
         {
+            if(publishedPubKeys.contains(pubKeys.get(i)))
+                continue;
+
+            publishedPubKeys.add(pubKeys.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_subscribed_line, null);
             oCL1.setId(View.generateViewId());
 
@@ -115,13 +125,15 @@ public class NotificationRequested extends AppCompatActivity
         int i = buttonsPubIds.indexOf(v.getId());
 
         Intent intent = new Intent(this, NotificationRequestedRequest.class);
-        intent.putExtra("idPub", pubIds.get(i));
+        intent.putExtra("idPub", pubKeys.get(i));
+
         startActivity(intent);
     }
 
     public void HandleNotificationSubscribed(View view)
     {
         Intent intent = new Intent(this, NotificationSubscribed.class);
+
         startActivity(intent);
     }
 
@@ -129,6 +141,7 @@ public class NotificationRequested extends AppCompatActivity
     {
         Intent intent = new Intent(this, Menu.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         startActivity(intent);
     }
 }

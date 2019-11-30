@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -33,14 +32,15 @@ import pdm.di.ubi.teamt.tables.User;
 
 public class Comment extends AppCompatActivity
 {
-    private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
+    private FirebaseUser mFirebaseUser = null;
 
-    private User user = null;
     private String idPub = null;
+    private User user = null;
 
     private ArrayList<Publicacao> publicacoes = new ArrayList<>();
-    private ArrayList<Inscrito> inscricoes = new ArrayList<>();
+    private ArrayList<String> publicacoesKeys = new ArrayList<>();
+    private ArrayList<String> inscricoes = new ArrayList<>();
 
     private int numberOfBoleias = 0;
 
@@ -53,9 +53,8 @@ public class Comment extends AppCompatActivity
         Intent intent = getIntent();
         idPub = intent.getStringExtra("idPub");
 
-        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         GetUserFromDB(mFirebaseUser.getUid());
     }
@@ -90,10 +89,14 @@ public class Comment extends AppCompatActivity
             {
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
+                    if(publicacoesKeys.contains(value.getKey()))
+                        continue;
+
                     Publicacao pub = value.getValue(Publicacao.class);
+                    publicacoesKeys.add(value.getKey());
                     publicacoes.add(pub);
                 }
-                GetSuccessfulInscritoFromDB();
+                GetSuccessfulInscricoesFromDB();
             }
 
             @Override
@@ -109,7 +112,7 @@ public class Comment extends AppCompatActivity
         postRef.orderByChild("data").endAt(s).addValueEventListener(valueEventListener);
     }
 
-    private void GetSuccessfulInscritoFromDB()
+    private void GetSuccessfulInscricoesFromDB()
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {
@@ -118,9 +121,13 @@ public class Comment extends AppCompatActivity
             {
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
+                    if(inscricoes.contains(value.getKey()))
+                        continue;
+
                     Inscrito inscrito = value.getValue(Inscrito.class);
+
                     if(publicacoes.contains(inscrito.getIdPub()))
-                        inscricoes.add(inscrito);
+                        inscricoes.add(value.getKey());
                 }
 
                 CalculateNumberOfBoleias();
@@ -141,29 +148,29 @@ public class Comment extends AppCompatActivity
         for(Publicacao p : publicacoes)
             if(p.getIdUser().equals(mFirebaseUser.getUid()))
                 numberOfBoleias++;
+
         ImageButton b = findViewById(R.id.comment_comment);
         b.setClickable(true);
     }
 
-
-    private void AddCommmentToDB(String idPub, String idUser, String userName)
+    private void AddCommentarioToDB(String idPub, String idUser, String userName)
     {
         EditText oComentario = findViewById(R.id.comment_text);
         String text = oComentario.getText().toString();
 
         if(text.isEmpty())
         {
-            Toast.makeText(Comment.this, "Erro: Necessita de introduzir um comentário",
+            Toast.makeText(Comment.this, "Erro: Necessita de introduzir um comentário.",
                     Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if(numberOfBoleias < 33)
+        if(numberOfBoleias <= 33) // Pelo menos
         {
-            Toast.makeText(Comment.this, "Erro: Necessita de ter participado ou realizado 33 boleias para poder comentar",
+            Toast.makeText(Comment.this, "Erro: Necessita de ter participado ou realizado 33 boleias",
                     Toast.LENGTH_LONG).show();
             return;
         }
+
         Comentario comment = new Comentario(idUser, userName, idPub, text);
 
         String key = mDatabase.child("comentario").push().getKey();
@@ -173,21 +180,24 @@ public class Comment extends AppCompatActivity
         mDatabase.updateChildren(childUpdates);
     }
 
-    public void HandleBack(View v)
+    private void ReturnToPost(String idPub)
     {
         Intent intent = new Intent(this, Post.class);
         intent.putExtra("idPub", idPub);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         startActivity(intent);
     }
 
     public void HandleAddComment(View v)
     {
-        AddCommmentToDB(idPub, mFirebaseUser.getUid(), user.getNome());
+        AddCommentarioToDB(idPub, mFirebaseUser.getUid(), user.getNome());
 
-        Intent intent = new Intent(this, Post.class);
-        intent.putExtra("idPub", idPub);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        ReturnToPost(idPub);
+    }
+
+    public void HandleBack(View v)
+    {
+        ReturnToPost(idPub);
     }
 }

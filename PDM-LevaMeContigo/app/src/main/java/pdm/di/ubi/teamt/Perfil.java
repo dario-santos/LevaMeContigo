@@ -43,6 +43,9 @@ public class Perfil extends AppCompatActivity
     private float userRating = 0;
 
     private ArrayList<Avaliar> avaliacoes =  new ArrayList<>();
+    private ArrayList<String> avaliacoesKeys =  new ArrayList<>();
+    private ArrayList<String> publishedAvaliacoesKeys =  new ArrayList<>();
+
     private ArrayList<Integer> buttonsUserIds =  new ArrayList<>();
 
     @Override
@@ -151,9 +154,15 @@ public class Perfil extends AppCompatActivity
             {
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
+                    if(avaliacoesKeys.contains(value.getKey()))
+                        continue;
+
                     Avaliar avaliar = value.getValue(Avaliar.class);
+
                     avaliacoes.add(avaliar);
+                    avaliacoesKeys.add(value.getKey());
                 }
+
                 ShowAvaliarToUser();
                 GetUserRate();
                 GetUserFromDB(idUser);
@@ -173,6 +182,11 @@ public class Perfil extends AppCompatActivity
 
         for(int i = 0 ; i < avaliacoes.size() ; i++)
         {
+            if(publishedAvaliacoesKeys.contains(avaliacoesKeys.get(i)))
+                continue;
+
+            publishedAvaliacoesKeys.add(avaliacoesKeys.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.perfil_line, null);
             oCL1.setId(View.generateViewId());
 

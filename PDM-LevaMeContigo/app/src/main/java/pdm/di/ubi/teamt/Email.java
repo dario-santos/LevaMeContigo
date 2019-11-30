@@ -22,7 +22,6 @@ public class Email
     {
         if(email == null)
             return false;
-        
         if(!email.contains(domain))
             return false;
 
@@ -31,7 +30,7 @@ public class Email
         for(int i = 0 ; i < e.length() ; i++)
             if(validAlphabet.indexOf(e.charAt(i)) == -1)
                 return false;
-        
+
         return true;
     }
 }

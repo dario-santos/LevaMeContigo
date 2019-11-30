@@ -27,13 +27,15 @@ import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class Menu extends AppCompatActivity
 {
-    private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
+    private FirebaseUser mFirebaseUser = null;
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
-    private ArrayList<String> pubIds = new ArrayList<>();
+    private ArrayList<String> pubKeys = new ArrayList<>();
+    private ArrayList<String> publishedPubKeys = new ArrayList<>();
+
     private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
-    private ArrayList<Integer> buttonsPostIds = new ArrayList<>();
+    private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,13 +43,13 @@ public class Menu extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        ReadPostsFromDataBase();
+        ReadPubsFromDataBase();
     }
 
-    private void ReadPostsFromDataBase()
+    private void ReadPubsFromDataBase()
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {
@@ -56,36 +58,42 @@ public class Menu extends AppCompatActivity
             {
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
-                    Publicacao post = value.getValue(Publicacao.class);
+                    if(!pubKeys.contains(value.getKey()))
+                    {
+                        Publicacao publicacao = value.getValue(Publicacao.class);
 
-                    if(pubIds.contains(value.getKey()))
-                        continue;
-
-                    pubs.add(post);
-                    pubIds.add(value.getKey());
+                        pubs.add(publicacao);
+                        pubKeys.add(value.getKey());
+                    }
                 }
-                ShowPostsToUser();
+                ShowPubsToUser();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
 
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        String s = df.format(c);
+        String formatedDate = dateFormatter.format(date);
 
         DatabaseReference postRef = mDatabase.child("Post");
-        postRef.orderByChild("data").startAt(s).addValueEventListener(valueEventListener);
+        postRef.orderByChild("data").startAt(formatedDate).addValueEventListener(valueEventListener);
     }
 
-    private void ShowPostsToUser()
+    private void ShowPubsToUser()
     {
         LinearLayout oLL = findViewById(R.id.menu_llsv);
 
+
         for(int i = 0 ; i < pubs.size() ; i++)
         {
+            if(publishedPubKeys.contains(pubKeys.get(i)))
+                continue;
+
+            publishedPubKeys.add(pubKeys.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
 
@@ -124,7 +132,7 @@ public class Menu extends AppCompatActivity
                 }
             });
             background.setId(View.generateViewId());
-            buttonsPostIds.add(background.getId());
+            buttonsPubIds.add(background.getId());
 
             oLL.addView(oCL1);
         }
@@ -133,6 +141,7 @@ public class Menu extends AppCompatActivity
     public void HandleCreatePost(View v)
     {
         Intent intent = new Intent(this, CreatePost.class);
+
         startActivity(intent);
     }
 
@@ -143,6 +152,7 @@ public class Menu extends AppCompatActivity
 
         Intent intent = new Intent(this, Perfil.class);
         intent.putExtra("idUser", mFirebaseUser.getUid());
+
         startActivity(intent);
     }
 
@@ -152,27 +162,31 @@ public class Menu extends AppCompatActivity
 
         Intent intent = new Intent(this, Perfil.class);
         intent.putExtra("idUser", pubs.get(i).getIdUser());
+
         startActivity(intent);
     }
 
     public void HandleEnterPost(View v)
     {
-        int i = buttonsPostIds.indexOf(v.getId());
+        int i = buttonsPubIds.indexOf(v.getId());
 
         Intent intent = new Intent(this, Post.class);
-        intent.putExtra("idPub", pubIds.get(i));
+        intent.putExtra("idPub", pubKeys.get(i));
+
         startActivity(intent);
     }
 
     public void HandleEnterNotification(View v)
     {
         Intent intent = new Intent(this, NotificationSubscribed.class);
+
         startActivity(intent);
     }
 
     public void HandleEnterSearch(View v)
     {
         Intent intent = new Intent(this, Search.class);
+
         startActivity(intent);
     }
 }

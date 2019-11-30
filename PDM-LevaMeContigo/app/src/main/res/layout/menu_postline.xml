@@ -21,6 +21,8 @@
         android:id="@+id/postline_userprofile"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="7dp"
         android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,16 +61,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/postline_data"
         app:layout_constraintStart_toEndOf="@+id/postline_data"
         app:layout_constraintTop_toTopOf="@+id/postline_data" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="    "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/postline_userprofile"
-        app:layout_constraintTop_toBottomOf="@+id/postline_hora" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

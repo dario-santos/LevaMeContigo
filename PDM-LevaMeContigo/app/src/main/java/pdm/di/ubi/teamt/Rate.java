@@ -70,7 +70,6 @@ public class Rate extends AppCompatActivity
         myRef.orderByKey().equalTo(idUser).addListenerForSingleValueEvent(valueEventListener);
     }
 
-
     private void AddRateToDB(String idUserAvaliador, String nomeAvaliador, String idUserAvaliado)
     {
         EditText oComentario = findViewById(R.id.rate_comment);

@@ -46,7 +46,11 @@ public class Post extends AppCompatActivity
     private String idPub = null;
 
     private ArrayList<Comentario> comentarios = new ArrayList<>();
+    private ArrayList<String> comentarioKeys = new ArrayList<>();
+    private ArrayList<String> publishedComentariosKeys = new ArrayList<>();
+
     private ArrayList<Integer> buttonsIdUsers = new ArrayList<>();
+
     private String inscritoKey = null;
 
     @Override
@@ -220,10 +224,16 @@ public class Post extends AppCompatActivity
             {
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
+                    if(comentarioKeys.contains(value.getKey()))
+                        continue;
+
                     Comentario comentario = value.getValue(Comentario.class);
 
                     if(comentario.getIdPub().equals(idPub))
+                    {
                         comentarios.add(comentario);
+                        comentarioKeys.add(value.getKey());
+                    }
                 }
 
                 ShowComentariosToUser();
@@ -243,6 +253,11 @@ public class Post extends AppCompatActivity
 
         for(int i = 0 ; i < comentarios.size() ; i++)
         {
+            if(publishedComentariosKeys.contains(comentarioKeys.get(i)))
+                continue;
+
+            publishedComentariosKeys.add(comentarioKeys.get(i));
+
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.comment_line, null);
             oCL1.setId(View.generateViewId());
 
