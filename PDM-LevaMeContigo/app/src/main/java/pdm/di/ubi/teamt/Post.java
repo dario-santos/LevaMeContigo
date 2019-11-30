@@ -67,7 +67,7 @@ public class Post extends AppCompatActivity
 
         GetPostFromDB(idPub);
 
-        ReadComentariosFromDB();
+        GetComentariosFromDB();
     }
 
     private void GetUserFromDB(String idUser) {
@@ -215,7 +215,7 @@ public class Post extends AppCompatActivity
         oContrapartidas.setText("Contrapartidas: " + tmp);
     }
 
-    private void ReadComentariosFromDB()
+    private void GetComentariosFromDB()
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {

@@ -9,13 +9,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.internal.SignInButtonImpl;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 import pdm.di.ubi.teamt.tables.Publicacao;
 
@@ -83,6 +89,22 @@ public class CreatePost extends AppCompatActivity
         {
             Toast.makeText(CreatePost.this, "Erro: necessita de escolher um número de passageiros.",
                     Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String choosedDate = ano + "-" + mes + "-" + dia;
+
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String todayDate = dateFormatter.format(date);
+
+
+
+        if(DateUtil.getSignDateDifferenceInDays(todayDate, choosedDate) < 3)
+        {
+            Toast.makeText(CreatePost.this, "Erro: necessita de escolher uma data daqui a mais do que 3 dias.",
+                    Toast.LENGTH_LONG).show();
             return false;
         }
 
