@@ -58,8 +58,6 @@ public class SignUp extends AppCompatActivity
                                     Toast.LENGTH_SHORT).show();
 
                             mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
-                            // Todo: Start Menu com o utilizador logado
                             AddUserToDataBase();
                             StartMenu();
                         }
@@ -112,6 +110,7 @@ public class SignUp extends AppCompatActivity
     private void StartMenu()
     {
         Intent intent = new Intent(this, Menu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -155,6 +154,7 @@ public class SignUp extends AppCompatActivity
     public void HandleBack(View v)
     {
         Intent intent = new Intent(this, SignIn.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

@@ -9,7 +9,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="86dp"
         android:background="@color/colorPrimary"
         android:maxWidth="400dp"
         app:layout_constraintBottom_toBottomOf="@+id/rate_back"
@@ -34,9 +34,11 @@
         app:layout_constraintTop_toTopOf="@+id/rate_back" />
 
     <EditText
-        android:id="@+id/rate_et"
-        android:layout_width="360dp"
+        android:id="@+id/rate_comment"
+        android:layout_width="0dp"
         android:layout_height="176dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/edrate_bordercolor"
         android:ems="10"
         android:gravity="top|left"
@@ -45,10 +47,10 @@
         android:maxLength="200"
         android:maxLines="7"
         android:padding="10dp"
+
         android:textCursorDrawable="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rate_tv2"
@@ -64,21 +66,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rate_header"
+        app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintVertical_bias="0.1" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/rate_rating"
         android:layout_width="233dp"
         android:layout_height="46dp"
-        android:layout_marginStart="5dp"
 
+        android:layout_marginStart="5dp"
         android:numStars="5"
         android:rating="1"
         android:stepSize="1"
         app:layout_constraintBottom_toBottomOf="@+id/rate_tv2"
         app:layout_constraintStart_toEndOf="@+id/rate_tv2"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rate_tv2"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
@@ -86,6 +88,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -99,6 +102,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleAddRate"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

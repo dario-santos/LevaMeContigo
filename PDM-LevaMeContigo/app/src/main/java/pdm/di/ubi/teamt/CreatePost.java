@@ -21,8 +21,6 @@ import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class CreatePost extends AppCompatActivity
 {
-
-    private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
 
@@ -32,7 +30,7 @@ public class CreatePost extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
@@ -142,13 +140,16 @@ public class CreatePost extends AppCompatActivity
 
         Toast.makeText(CreatePost.this, "Publicação adicionada com sucesso.",
                 Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(this, Menu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void HandleBack(View v)
     {
         Intent intent = new Intent(this, Menu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

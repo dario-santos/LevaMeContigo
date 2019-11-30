@@ -24,12 +24,8 @@ import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class NotificationRequested extends AppCompatActivity
 {
-
-    private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
-
-    private String idUser = null;
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
     private ArrayList<String> pubIds = new ArrayList<>();
@@ -44,20 +40,16 @@ public class NotificationRequested extends AppCompatActivity
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        idUser = mFirebaseUser.getUid();
-
-        GetPubFromDB(idUser);
+        GetPubFromDB(mFirebaseUser.getUid());
     }
 
     private void GetPubFromDB(final String idUser)
     {
-
         ValueEventListener pubValueEventListener = new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Publicacao pub = value.getValue(Publicacao.class);
@@ -68,6 +60,7 @@ public class NotificationRequested extends AppCompatActivity
                         pubIds.add(value.getKey());
                     }
                 }
+
                 ShowPostsToUser();
             }
 
@@ -135,6 +128,7 @@ public class NotificationRequested extends AppCompatActivity
     public void HandleBack(View v)
     {
         Intent intent = new Intent(this, Menu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

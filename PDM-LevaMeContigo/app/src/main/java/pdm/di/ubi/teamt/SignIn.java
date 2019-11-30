@@ -27,7 +27,6 @@ public class SignIn extends AppCompatActivity
         mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
-
     private void SignIn(String email, String password)
     {
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
@@ -54,6 +53,7 @@ public class SignIn extends AppCompatActivity
     private void StartMenu()
     {
         Intent intent = new Intent(this, Menu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -82,12 +82,14 @@ public class SignIn extends AppCompatActivity
     public void HandleSignUp(View v)
     {
         Intent intent = new Intent(this, SignUp.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void HandleSignInAnonimo(View v)
     {
         Intent intent = new Intent(this, MenuGuest.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

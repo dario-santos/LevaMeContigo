@@ -27,14 +27,13 @@ import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class Menu extends AppCompatActivity
 {
-    private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
 
-    private ArrayList<Publicacao> posts = new ArrayList<>();
-    private ArrayList<Integer> userIds = new ArrayList<>();
+    private ArrayList<Publicacao> pubs = new ArrayList<>();
+    private ArrayList<String> pubIds = new ArrayList<>();
+    private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
     private ArrayList<Integer> buttonsPostIds = new ArrayList<>();
-    private ArrayList<String> postIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,11 +58,11 @@ public class Menu extends AppCompatActivity
                 {
                     Publicacao post = value.getValue(Publicacao.class);
 
-                    if(postIds.contains(value.getKey()))
+                    if(pubIds.contains(value.getKey()))
                         continue;
 
-                    posts.add(post);
-                    postIds.add(value.getKey());
+                    pubs.add(post);
+                    pubIds.add(value.getKey());
                 }
                 ShowPostsToUser();
             }
@@ -72,23 +71,20 @@ public class Menu extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         };
 
-
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         String s = df.format(c);
-        String a = df.format(c);
-
 
         DatabaseReference postRef = mDatabase.child("Post");
-        postRef.orderByChild("data").startAt(a).addValueEventListener(valueEventListener);
+        postRef.orderByChild("data").startAt(s).addValueEventListener(valueEventListener);
     }
 
     private void ShowPostsToUser()
     {
         LinearLayout oLL = findViewById(R.id.menu_llsv);
 
-        for(int i = 0 ; i < posts.size() ; i++)
+        for(int i = 0 ; i < pubs.size() ; i++)
         {
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
@@ -103,18 +99,18 @@ public class Menu extends AppCompatActivity
                 }
             });
             userProfile.setId(View.generateViewId());
-            userIds.add(userProfile.getId());
+            buttonsUserIds.add(userProfile.getId());
 
             TextView origemDestino = oCL1.findViewById(R.id.postline_origemdestino);
-            origemDestino.setText(posts.get(i).getOrigem() + " -> " + posts.get(i).getDestino());
+            origemDestino.setText(pubs.get(i).getOrigem() + " -> " + pubs.get(i).getDestino());
             origemDestino.setId(View.generateViewId());
 
             TextView data = oCL1.findViewById(R.id.postline_data);
-            data.setText("Dia: " + posts.get(i).getData());
+            data.setText("Dia: " + pubs.get(i).getData());
             data.setId(View.generateViewId());
 
             TextView hora = oCL1.findViewById(R.id.postline_hora);
-            hora.setText("Hora: " + posts.get(i).getHora());
+            hora.setText("Hora: " + pubs.get(i).getHora());
             hora.setId(View.generateViewId());
 
             ImageView background = oCL1.findViewById(R.id.postline_background);
@@ -152,10 +148,10 @@ public class Menu extends AppCompatActivity
 
     public void HandleEnterProfile(View v)
     {
-        int i = userIds.indexOf(v.getId());
+        int i = buttonsUserIds.indexOf(v.getId());
 
         Intent intent = new Intent(this, Perfil.class);
-        intent.putExtra("idUser", posts.get(i).getIdUser());
+        intent.putExtra("idUser", pubs.get(i).getIdUser());
         startActivity(intent);
     }
 
@@ -164,7 +160,7 @@ public class Menu extends AppCompatActivity
         int i = buttonsPostIds.indexOf(v.getId());
 
         Intent intent = new Intent(this, Post.class);
-        intent.putExtra("idPub", postIds.get(i));
+        intent.putExtra("idPub", pubIds.get(i));
         startActivity(intent);
     }
 

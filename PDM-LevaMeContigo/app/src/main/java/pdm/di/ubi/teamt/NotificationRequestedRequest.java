@@ -31,17 +31,16 @@ import pdm.di.ubi.teamt.tables.User;
 
 public class NotificationRequestedRequest extends AppCompatActivity
 {
-    private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
 
     private String idPub = null;
 
     private ArrayList<Inscrito> inscritos = new ArrayList<>();
+    private ArrayList<String> inscritoIds = new ArrayList<>();
     private ArrayList<String> userIds = new ArrayList<>();
     private ArrayList<User> users = new ArrayList<>();
-    private ArrayList<String> inscritoIds = new ArrayList<>();
-    private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
 
+    private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
     private ArrayList<Integer> buttonsResponseAcceptIds = new ArrayList<>();
     private ArrayList<Integer> buttonsResponseRejectIds = new ArrayList<>();
 
@@ -51,7 +50,6 @@ public class NotificationRequestedRequest extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_requested_request);
 
-        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Intent intent = getIntent();
@@ -215,6 +213,7 @@ public class NotificationRequestedRequest extends AppCompatActivity
     public void HandleBack(View v)
     {
         Intent intent = new Intent(this, NotificationRequested.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -223,14 +222,12 @@ public class NotificationRequestedRequest extends AppCompatActivity
         int i = buttonsResponseAcceptIds.indexOf(v.getId());
         String inscrKey = inscritoIds.get(i);
 
-
         mDatabase.child("Inscrito/" + inscrKey + "/accepted").setValue(true);
         ResetActivity();
     }
 
     public void HandleRejectInscrito(View v)
     {
-        // Ler o id do inscrito
         int i = buttonsResponseRejectIds.indexOf(v.getId());
         String inscrKey = inscritoIds.get(i);
 
@@ -257,7 +254,7 @@ public class NotificationRequestedRequest extends AppCompatActivity
     {
         Intent intent = new Intent(this, NotificationRequestedRequest.class);
         intent.putExtra("idPub", idPub);
-
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

@@ -20,12 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import pdm.di.ubi.teamt.tables.Avaliar;
 import pdm.di.ubi.teamt.tables.Inscrito;
 import pdm.di.ubi.teamt.tables.Publicacao;
 
 public class NotificationSubscribed extends AppCompatActivity
 {
-    private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
 
@@ -36,6 +36,7 @@ public class NotificationSubscribed extends AppCompatActivity
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
 
     ArrayList<String> inscritos = new ArrayList<>();
+    ArrayList<String> avaliacoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,10 +49,34 @@ public class NotificationSubscribed extends AppCompatActivity
 
         idUser = mFirebaseUser.getUid();
 
-        GetPubFromDB(idUser);
+        GetAvaliarFromDB(idUser);
     }
 
-    private void GetPubFromDB(final String idUser)
+    private void GetAvaliarFromDB(final String idUser)
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    Avaliar avaliar = value.getValue(Avaliar.class);
+                    avaliacoes.add(avaliar.getIdPub());
+                }
+
+                GetInscritoFromDB(idUser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        DatabaseReference postRef = mDatabase.child("Avaliar");
+        postRef.orderByChild("idUserAvaliador").equalTo(idUser).addValueEventListener(valueEventListener);
+    }
+
+    private void GetInscritoFromDB(final String idUser)
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {
@@ -69,32 +94,7 @@ public class NotificationSubscribed extends AppCompatActivity
                         inscritos.add(inscr.getIdPub());
                 }
 
-                ValueEventListener pubValueEventListener = new ValueEventListener()
-                {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot)
-                    {
-
-                        for(DataSnapshot value : dataSnapshot.getChildren())
-                        {
-                            if(!inscritos.contains(value.getKey()))
-                                continue;
-
-                            Publicacao post = value.getValue(Publicacao.class);
-
-                            pubs.add(post);
-                            pubIds.add(value.getKey());
-                        }
-                        ShowPostsToUser();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {}
-                };
-
-                DatabaseReference postRef = mDatabase.child("Post");
-                postRef.orderByChild("data").addValueEventListener(pubValueEventListener);
-
+                GetPubFromDB();
             }
 
             @Override
@@ -103,6 +103,39 @@ public class NotificationSubscribed extends AppCompatActivity
 
         DatabaseReference postRef = mDatabase.child("Inscrito");
         postRef.orderByChild("idUser").equalTo(idUser).addValueEventListener(valueEventListener);
+    }
+
+    private void GetPubFromDB()
+    {
+        ValueEventListener pubValueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    if(!inscritos.contains(value.getKey()))
+                        continue;
+
+                    if(avaliacoes.contains(value.getKey()))
+                        continue;
+
+                    Publicacao post = value.getValue(Publicacao.class);
+
+                    pubs.add(post);
+                    pubIds.add(value.getKey());
+                }
+
+                ShowPostsToUser();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        DatabaseReference postRef = mDatabase.child("Post");
+        postRef.orderByChild("data").addValueEventListener(pubValueEventListener);
     }
 
     private void ShowPostsToUser()

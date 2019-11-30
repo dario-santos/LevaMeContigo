@@ -7,33 +7,40 @@ import java.util.Map;
 
 public class Avaliar
 {
-    String idUser;
-    String userName;
+    String idUserAvaliador;
+    String nomeAvaliador;
+    String idUserAvaliado;
     String idPub;
     String comentario;
     float nota;
 
     public Avaliar() {}
 
-    public Avaliar(String idUser, String userName, String idPub, String comentario, float nota)
+    public Avaliar(String idUserAvaliador, String nomeAvaliador, String idUserAvaliado, String idPub, String comentario, float nota)
     {
-        this.idUser = idUser;
-        this.userName = userName;
-        this.idPub = idPub;
+        this.idUserAvaliador = idUserAvaliador;
+        this.nomeAvaliador = nomeAvaliador;
+        this.idUserAvaliado = idUserAvaliado;
+        this.idPub= idPub;
         this.comentario = comentario;
         this.nota = nota;
     }
 
 
-    public String getIdUser()
+    public String getIdUserAvaliador()
     {
-        return idUser;
+        return idUserAvaliador;
     }
 
 
-    public String getUserName()
+    public String getNomeAvaliador()
     {
-        return userName;
+        return nomeAvaliador;
+    }
+
+    public String getIdUserAvaliado()
+    {
+        return idUserAvaliado;
     }
 
     public String getIdPub()
@@ -55,8 +62,9 @@ public class Avaliar
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("idUser", this.idUser);
-        result.put("userName", this.userName);
+        result.put("idUserAvaliador", this.idUserAvaliador);
+        result.put("nomeAvaliador", this.nomeAvaliador);
+        result.put("idUserAvaliado", this.idUserAvaliado);
         result.put("idPub", this.idPub);
         result.put("comentario", this.comentario);
         result.put("nota", this.nota);

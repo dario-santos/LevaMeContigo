@@ -22,12 +22,10 @@ public class Comentario
         this.comentario = comentario;
     }
 
-
     public String getIdUser()
     {
         return idUser;
     }
-
 
     public String getUserName()
     {

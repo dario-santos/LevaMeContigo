@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.DataUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import pdm.di.ubi.teamt.tables.Avaliar;
 import pdm.di.ubi.teamt.tables.Comentario;
 import pdm.di.ubi.teamt.tables.Inscrito;
 import pdm.di.ubi.teamt.tables.Publicacao;
@@ -37,12 +39,11 @@ import pdm.di.ubi.teamt.tables.User;
 
 public class Post extends AppCompatActivity
 {
-    private FirebaseAuth mFirebaseAuth = null;
     private FirebaseUser mFirebaseUser = null;
     private DatabaseReference mDatabase = null;
 
     private Publicacao pub = null;
-    private String pubId = null;
+    private String idPub = null;
 
     private ArrayList<Comentario> comentarios = new ArrayList<>();
     private ArrayList<Integer> buttonsIdUsers = new ArrayList<>();
@@ -55,16 +56,13 @@ public class Post extends AppCompatActivity
         setContentView(R.layout.activity_post);
 
         Intent intent = getIntent();
-        pubId = intent.getStringExtra("idPub");
+        idPub = intent.getStringExtra("idPub");
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mFirebaseUser =  FirebaseAuth.getInstance().getCurrentUser();
 
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        GetPostFromDB(idPub);
 
-        GetPostFromDB(pubId);
-
-        GetInscritoFromDB(mFirebaseUser.getUid());
         ReadComentariosFromDB();
     }
 
@@ -111,8 +109,10 @@ public class Post extends AppCompatActivity
                 {
                     pub = value.getValue(Publicacao.class);
                     UpdateGUI(pub);
+                    GetAvaliarFromDB();
                     GetUserFromDB(pub.getIdUser());
                 }
+
                 if(pub.getIdUser().equals(mFirebaseUser.getUid()))
                 {
                     if(canUserDeleteEditPost())
@@ -123,11 +123,14 @@ public class Post extends AppCompatActivity
                         edit.setVisibility(View.VISIBLE);
                     }
                 }
+
+                GetInscritoFromDB(mFirebaseUser.getUid());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         };
+
         Query query = myRef.orderByKey().equalTo(idPost);
         query.addListenerForSingleValueEvent(valueEventListener);
     }
@@ -144,21 +147,16 @@ public class Post extends AppCompatActivity
 
     private void GetInscritoFromDB(final String idUser)
     {
-        DatabaseReference myRef = mDatabase.child("Inscrito");
-
         ValueEventListener valueEventListener = new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                if(pub.getIdUser().equals(mFirebaseUser.getUid()))
-                    return;
-
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Inscrito inscrito = value.getValue(Inscrito.class);
 
-                    if(inscrito.getIdPub().equals(pubId))
+                    if(inscrito.getIdPub().equals(idPub))
                     {
                         inscritoKey = value.getKey();
 
@@ -175,8 +173,20 @@ public class Post extends AppCompatActivity
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         };
-        Query query = myRef.orderByChild("idUser").equalTo(idUser);
-        query.addListenerForSingleValueEvent(valueEventListener);
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateToday = df.format(c);
+
+        if(DateUtil.getSignDateDifferenceInDays(dateToday, pub.getData()) < 0)
+            return;
+
+        if(pub.getIdUser().equals(mFirebaseUser.getUid()))
+            return;
+
+        DatabaseReference myRef = mDatabase.child("Inscrito");
+        myRef.orderByChild("idUser").equalTo(idUser).addListenerForSingleValueEvent(valueEventListener);
     }
 
     private void UpdateGUI(Publicacao pub)
@@ -212,7 +222,7 @@ public class Post extends AppCompatActivity
                 {
                     Comentario comentario = value.getValue(Comentario.class);
 
-                    if(comentario.getIdPub().equals(pubId))
+                    if(comentario.getIdPub().equals(idPub))
                         comentarios.add(comentario);
                 }
 
@@ -260,6 +270,60 @@ public class Post extends AppCompatActivity
         }
     }
 
+    private void GetAvaliarFromDB()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    Avaliar avaliar = value.getValue(Avaliar.class);
+
+                    if(avaliar.getIdPub() != idPub)
+                        continue;
+
+                    if(avaliar.getIdUserAvaliado().equals(pub.getIdUser()))
+                    {
+                        Button sendRate = findViewById(R.id.post_avaliar);
+                        sendRate.setVisibility(View.INVISIBLE);
+                        return;
+                    }
+                }
+
+                Button sendRate = findViewById(R.id.post_avaliar);
+                sendRate.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        };
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateToday = df.format(c);
+
+        if(DateUtil.getSignDateDifferenceInDays(dateToday, pub.getData()) >= 0)
+        {
+            Button sendRate = findViewById(R.id.post_avaliar);
+            sendRate.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        if(pub.getIdUser().equals(mFirebaseUser.getUid()))
+        {
+            Button sendRate = findViewById(R.id.post_avaliar);
+            sendRate.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        DatabaseReference myRef = mDatabase.child("Avaliar");
+        myRef.orderByChild("idUserAvaliador").equalTo(mFirebaseUser.getUid()).addListenerForSingleValueEvent(valueEventListener);
+    }
+
     private void DeleteComentariosFromDB()
     {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Comentario");
@@ -271,7 +335,7 @@ public class Post extends AppCompatActivity
                 for(DataSnapshot value : snapshot.getChildren())
                 {
                     Comentario c = value.getValue(Comentario.class);
-                    if(c.getIdPub().equals(pubId))
+                    if(c.getIdPub().equals(idPub))
                         value.getRef().removeValue();
                 }
                 DeleteInscritosFromDB();
@@ -292,7 +356,7 @@ public class Post extends AppCompatActivity
                 for(DataSnapshot value : snapshot.getChildren())
                 {
                     Comentario c = value.getValue(Comentario.class);
-                    if(c.getIdPub().equals(pubId))
+                    if(c.getIdPub().equals(idPub))
                         value.getRef().removeValue();
                 }
                 ReturnToMenu();
@@ -305,7 +369,7 @@ public class Post extends AppCompatActivity
 
     private void ReturnToMenu()
     {
-        DatabaseReference myRef = mDatabase.child("Post/"+ pubId);
+        DatabaseReference myRef = mDatabase.child("Post/"+ idPub);
         myRef.removeValue();
 
         Intent intent = new Intent(this, Menu.class);
@@ -339,7 +403,7 @@ public class Post extends AppCompatActivity
     {
         v.setVisibility(View.INVISIBLE);
 
-        Inscrito newPost = new Inscrito(mFirebaseUser.getUid(), pubId, false);
+        Inscrito newPost = new Inscrito(mFirebaseUser.getUid(), idPub, false);
 
         String key = mDatabase.child("Inscrito").push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();
@@ -369,15 +433,15 @@ public class Post extends AppCompatActivity
     public void HandleAddComment(View v)
     {
         Intent intent = new Intent(this, Comment.class);
-        intent.putExtra("idPub", pubId);
+        intent.putExtra("idPub", idPub);
         startActivity(intent);
     }
 
     public void HandleRateUser(View v)
     {
         Intent intent = new Intent(this, Rate.class);
-        intent.putExtra("idUser", pub.getIdUser());
-        intent.putExtra("idPub", pubId);
+        intent.putExtra("idUserAvaliado", pub.getIdUser());
+        intent.putExtra("idPub", idPub);
         startActivity(intent);
     }
 

@@ -159,6 +159,7 @@
         android:layout_height="wrap_content"
         android:onClick="HandleRateUser"
         android:text="Avaliar"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/post_comentar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/post_comentar"

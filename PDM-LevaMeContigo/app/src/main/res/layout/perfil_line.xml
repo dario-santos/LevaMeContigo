@@ -4,7 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="120dp">
+
+    <ImageView
+        android:id="@+id/perfil_line_background"
+        android:layout_width="383dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/perfil_line_userimage"
+        app:layout_constraintTop_toBottomOf="@+id/perfil_line_userimage"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@color/PerfilBackGround" />
+
+    <TextView
+        android:id="@+id/perfil_line_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Nota: "
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_username"
+        app:layout_constraintStart_toEndOf="@+id/perfil_line_username"
+        app:layout_constraintTop_toTopOf="@+id/perfil_line_username" />
 
     <ImageButton
         android:id="@+id/perfil_line_userimage"
@@ -30,67 +54,19 @@
         app:layout_constraintTop_toTopOf="@+id/perfil_line_userimage"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/perfil_line_star1"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_username"
-        app:layout_constraintStart_toEndOf="@+id/perfil_line_username"
-        app:layout_constraintTop_toTopOf="@+id/perfil_line_username"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/ic_star" />
-
-    <ImageView
-        android:id="@+id/perfil_line_star2"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_star1"
-        app:layout_constraintStart_toEndOf="@+id/perfil_line_star1"
-        app:layout_constraintTop_toTopOf="@+id/perfil_line_star1"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/ic_star" />
-
-    <ImageView
-        android:id="@+id/perfil_line_star3"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/ic_star"
-        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_star2"
-        app:layout_constraintStart_toEndOf="@+id/perfil_line_star2"
-        app:layout_constraintTop_toTopOf="@+id/perfil_line_star2"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <ImageView
-        android:id="@+id/perfil_line_star4"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/ic_star"
-        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_star3"
-        app:layout_constraintStart_toEndOf="@+id/perfil_line_star3"
-        app:layout_constraintTop_toTopOf="@+id/perfil_line_star3"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <ImageView
-        android:id="@+id/perfil_line_star5"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="2dp"
-        android:background="@drawable/ic_star"
-        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_star4"
-        app:layout_constraintStart_toEndOf="@+id/perfil_line_star4"
-        app:layout_constraintTop_toTopOf="@+id/perfil_line_star4"
-        app:layout_constraintVertical_bias="0.5" />
-
     <TextView
-        android:id="@+id/perfil_line_description"
+        android:id="@+id/perfil_line_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="A boleia foi boa mas o carro não funcionava o que dificultou."
-        app:layout_constraintStart_toStartOf="@+id/perfil_line_userimage"
-        app:layout_constraintTop_toBottomOf="@+id/perfil_line_userimage" />
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="NOTA"
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_line_background"
+        app:layout_constraintEnd_toEndOf="@+id/perfil_line_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/perfil_line_background"
+        app:layout_constraintTop_toTopOf="@+id/perfil_line_background"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
