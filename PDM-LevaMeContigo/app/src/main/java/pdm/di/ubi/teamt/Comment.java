@@ -43,6 +43,7 @@ public class Comment extends AppCompatActivity
     private ArrayList<String> inscricoes = new ArrayList<>();
 
     private int numberOfBoleias = 0;
+    private boolean pubExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,6 +57,7 @@ public class Comment extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        DoesPubExist();
         GetUserFromDB(mFirebaseUser.getUid());
     }
 
@@ -80,22 +82,19 @@ public class Comment extends AppCompatActivity
         myRef.orderByKey().equalTo(idUser).addListenerForSingleValueEvent(valueEventListener);
     }
 
-    private void GetPubsFromDB()
+    private void DoesPubExist()
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                for(DataSnapshot value : dataSnapshot.getChildren())
-                {
-                    if(publicacoesKeys.contains(value.getKey()))
-                        continue;
+                pubExist = false;
 
-                    Publicacao pub = value.getValue(Publicacao.class);
-                    publicacoesKeys.add(value.getKey());
-                    publicacoes.add(pub);
-                }
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                    if(value.getKey().equals(idPub))
+                        pubExist = true;
+
                 GetSuccessfulInscricoesFromDB();
             }
 
@@ -103,13 +102,8 @@ public class Comment extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         };
 
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
-        String s = df.format(c);
-
         DatabaseReference postRef = mDatabase.child("Post");
-        postRef.orderByChild("data").endAt(s).addValueEventListener(valueEventListener);
+        postRef.orderByKey().equalTo(idPub).addValueEventListener(valueEventListener);
     }
 
     private void GetSuccessfulInscricoesFromDB()
@@ -153,6 +147,38 @@ public class Comment extends AppCompatActivity
         b.setClickable(true);
     }
 
+    private void GetPubsFromDB()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    if(publicacoesKeys.contains(value.getKey()))
+                        continue;
+
+                    Publicacao pub = value.getValue(Publicacao.class);
+                    publicacoesKeys.add(value.getKey());
+                    publicacoes.add(pub);
+                }
+                GetSuccessfulInscricoesFromDB();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String s = df.format(c);
+
+        DatabaseReference postRef = mDatabase.child("Post");
+        postRef.orderByChild("data").endAt(s).addValueEventListener(valueEventListener);
+    }
+
     private void AddCommentarioToDB(String idPub, String idUser, String userName)
     {
         EditText oComentario = findViewById(R.id.comment_text);
@@ -170,6 +196,14 @@ public class Comment extends AppCompatActivity
                     Toast.LENGTH_LONG).show();
             return;
         }
+        if(!pubExist)
+        {
+            Toast.makeText(Comment.this, "Erro: A publicação em questão foi eliminada.",
+                    Toast.LENGTH_SHORT).show();
+
+            ReturnToMenu();
+            return;
+        }
 
         Comentario comment = new Comentario(idUser, userName, idPub, text);
 
@@ -180,6 +214,12 @@ public class Comment extends AppCompatActivity
         mDatabase.updateChildren(childUpdates);
     }
 
+    private void ReturnToMenu()
+    {
+        Intent intent = new Intent(this, Menu.class);
+
+        startActivity(intent);
+    }
     private void ReturnToPost(String idPub)
     {
         Intent intent = new Intent(this, Post.class);
