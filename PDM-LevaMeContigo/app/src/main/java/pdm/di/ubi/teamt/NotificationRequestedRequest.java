@@ -37,8 +37,6 @@ public class NotificationRequestedRequest extends AppCompatActivity
 
     private ArrayList<Inscrito> inscritos = new ArrayList<>();
     private ArrayList<String> inscritoIds = new ArrayList<>();
-    private ArrayList<String> publishedInscritoKeys = new ArrayList<>();
-
 
     private ArrayList<String> userIds = new ArrayList<>();
     private ArrayList<User> users = new ArrayList<>();
@@ -104,8 +102,10 @@ public class NotificationRequestedRequest extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                if(!dataSnapshot.exists())
-                   return;
+                inscritos.clear();
+                inscritoIds.clear();
+
+                userIds.clear();
 
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
@@ -121,6 +121,7 @@ public class NotificationRequestedRequest extends AppCompatActivity
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot)
                     {
+                        users.clear();
 
                         for(DataSnapshot value : dataSnapshot.getChildren())
                         {
@@ -130,7 +131,6 @@ public class NotificationRequestedRequest extends AppCompatActivity
                             User user = value.getValue(User.class);
                             users.add(user);
                         }
-
                         ShowInscritosToUser();
                     }
 
@@ -153,14 +153,15 @@ public class NotificationRequestedRequest extends AppCompatActivity
     private void ShowInscritosToUser()
     {
         LinearLayout oLL = findViewById(R.id.notification_requested_request_llsv);
+        oLL.removeAllViews();
+
+        buttonsUserIds.clear();
+
+        buttonsResponseAcceptIds.clear();
+        buttonsResponseRejectIds.clear();
 
         for(int i = 0 ; i < inscritos.size() ; i++)
         {
-            if(publishedInscritoKeys.contains(inscritoIds.get(i)))
-                continue;
-
-            publishedInscritoKeys.add(inscritoIds.get(i));
-
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_requested_request_line, null);
             oCL1.setId(View.generateViewId());
 
@@ -248,7 +249,7 @@ public class NotificationRequestedRequest extends AppCompatActivity
                 for(DataSnapshot value : snapshot.getChildren())
                     value.getRef().removeValue();
 
-                ResetActivity();
+                ShowInscritosToUser();
             }
 
             @Override

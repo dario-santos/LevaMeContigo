@@ -32,7 +32,6 @@ public class Menu extends AppCompatActivity
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
     private ArrayList<String> pubKeys = new ArrayList<>();
-    private ArrayList<String> publishedPubKeys = new ArrayList<>();
 
     private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
@@ -46,16 +45,20 @@ public class Menu extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        ReadPubsFromDataBase();
+        GetPubsFromDB();
     }
 
-    private void ReadPubsFromDataBase()
+    private void GetPubsFromDB()
     {
         ValueEventListener valueEventListener = new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+
+                pubs.clear();
+                pubKeys.clear();
+
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     if(!pubKeys.contains(value.getKey()))
@@ -85,15 +88,13 @@ public class Menu extends AppCompatActivity
     private void ShowPubsToUser()
     {
         LinearLayout oLL = findViewById(R.id.menu_llsv);
+        oLL.removeAllViews();
 
+        buttonsUserIds.clear();
+        buttonsPubIds.clear();
 
         for(int i = 0 ; i < pubs.size() ; i++)
         {
-            if(publishedPubKeys.contains(pubKeys.get(i)))
-                continue;
-
-            publishedPubKeys.add(pubKeys.get(i));
-
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
 

@@ -27,8 +27,6 @@ public class MenuGuest extends AppCompatActivity
     private DatabaseReference mDatabase = null;
 
     private ArrayList<Publicacao> posts = new ArrayList<>();
-    private ArrayList<String> pubKeys = new ArrayList<>();
-    private ArrayList<String> publishedPubKeys = new ArrayList<>();
 
     // Number of days that the user can see ads from now
     private int numberOfDays = 7;
@@ -51,14 +49,12 @@ public class MenuGuest extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                posts.clear();
+
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
-                    if(!pubKeys.contains(value.getKey()))
-                    {
-                        Publicacao pub = value.getValue(Publicacao.class);
-                        pubKeys.add(value.getKey());
-                        posts.add(pub);
-                    }
+                    Publicacao pub = value.getValue(Publicacao.class);
+                    posts.add(pub);
                 }
                 ShowPostsToUser();
             }
@@ -84,13 +80,10 @@ public class MenuGuest extends AppCompatActivity
     private void ShowPostsToUser()
     {
         LinearLayout oLL = findViewById(R.id.menuguest_llsv);
+        oLL.removeAllViews();
 
         for(int i = 0 ; i < posts.size() ; i++)
         {
-            if(publishedPubKeys.contains(pubKeys.get(i)))
-                continue;
-
-            publishedPubKeys.add(pubKeys.get(i));
 
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menuguest_line,
                     null);

@@ -43,8 +43,6 @@ public class Perfil extends AppCompatActivity
     private float userRating = 0;
 
     private ArrayList<Avaliar> avaliacoes =  new ArrayList<>();
-    private ArrayList<String> avaliacoesKeys =  new ArrayList<>();
-    private ArrayList<String> publishedAvaliacoesKeys =  new ArrayList<>();
 
     private ArrayList<Integer> buttonsUserIds =  new ArrayList<>();
 
@@ -152,15 +150,12 @@ public class Perfil extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
+                avaliacoes.clear();
+
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
-                    if(avaliacoesKeys.contains(value.getKey()))
-                        continue;
-
                     Avaliar avaliar = value.getValue(Avaliar.class);
-
                     avaliacoes.add(avaliar);
-                    avaliacoesKeys.add(value.getKey());
                 }
 
                 ShowAvaliarToUser();
@@ -179,14 +174,10 @@ public class Perfil extends AppCompatActivity
     private void ShowAvaliarToUser()
     {
         LinearLayout oLL = findViewById(R.id.perfil_llsv);
+        oLL.removeAllViews();
 
         for(int i = 0 ; i < avaliacoes.size() ; i++)
         {
-            if(publishedAvaliacoesKeys.contains(avaliacoesKeys.get(i)))
-                continue;
-
-            publishedAvaliacoesKeys.add(avaliacoesKeys.get(i));
-
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.perfil_line, null);
             oCL1.setId(View.generateViewId());
 
@@ -206,9 +197,8 @@ public class Perfil extends AppCompatActivity
             userName.setText(avaliacoes.get(i).getNomeAvaliador());
             userName.setId(View.generateViewId());
 
-            TextView nota = oCL1.findViewById(R.id.perfil_line_rate);
-            nota.setText("Nota: " + avaliacoes.get(i).getNota());
-            nota.setId(View.generateViewId());
+            // Calcular o número de estrelas
+            ShowStarsToUser((int) avaliacoes.get(i).getNota(), oCL1);
 
             TextView comentario = oCL1.findViewById(R.id.perfil_line_comment);
             ImageView background = oCL1.findViewById(R.id.perfil_line_background);
@@ -221,6 +211,27 @@ public class Perfil extends AppCompatActivity
 
             oLL.addView(oCL1);
         }
+    }
+
+    private void ShowStarsToUser(int rate, ConstraintLayout oCL1)
+    {
+        ImageView star1 = oCL1.findViewById(R.id.perfil_line_star1);
+        ImageView star2 = oCL1.findViewById(R.id.perfil_line_star2);
+        ImageView star3 = oCL1.findViewById(R.id.perfil_line_star3);
+        ImageView star4 = oCL1.findViewById(R.id.perfil_line_star4);
+        ImageView star5 = oCL1.findViewById(R.id.perfil_line_star5);
+
+        ArrayList<ImageView> stars = new ArrayList<>();
+
+        stars.add(star1);
+        stars.add(star2);
+        stars.add(star3);
+        stars.add(star4);
+        stars.add(star5);
+
+        for(int i = 0 ; i < rate ; i++)
+            star1.setBackground( getDrawable(R.drawable.ic_star_filled));
+
     }
 
     private void UpdateGUI(User user)

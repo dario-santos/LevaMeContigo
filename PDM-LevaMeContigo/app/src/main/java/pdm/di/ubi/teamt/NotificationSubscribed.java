@@ -32,13 +32,12 @@ public class NotificationSubscribed extends AppCompatActivity
     private String idUser = null;
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
-    private ArrayList<String> pubIds = new ArrayList<>();
-    private ArrayList<String> publishedPubKeys = new ArrayList<>();
+    private ArrayList<String> pubKeys = new ArrayList<>();
 
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
 
-    ArrayList<String> inscritos = new ArrayList<>();
-    ArrayList<String> avaliacoes = new ArrayList<>();
+    private ArrayList<String> inscritos = new ArrayList<>();
+    private ArrayList<String> avaliacoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,6 +55,8 @@ public class NotificationSubscribed extends AppCompatActivity
 
     private void GetAvaliarFromDB(final String idUser)
     {
+        avaliacoes.clear();
+
         ValueEventListener valueEventListener = new ValueEventListener()
         {
             @Override
@@ -85,6 +86,8 @@ public class NotificationSubscribed extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                inscritos.clear();
+
                 if(!dataSnapshot.exists())
                     return;
 
@@ -114,6 +117,8 @@ public class NotificationSubscribed extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                pubs.clear();
+                pubKeys.clear();
 
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
@@ -123,13 +128,10 @@ public class NotificationSubscribed extends AppCompatActivity
                     if(avaliacoes.contains(value.getKey()))
                         continue;
 
-                    if(pubIds.contains(value.getKey()))
-                        continue;
-
                     Publicacao post = value.getValue(Publicacao.class);
 
                     pubs.add(post);
-                    pubIds.add(value.getKey());
+                    pubKeys.add(value.getKey());
                 }
 
                 ShowPostsToUser();
@@ -146,14 +148,12 @@ public class NotificationSubscribed extends AppCompatActivity
     private void ShowPostsToUser()
     {
         LinearLayout oLL = findViewById(R.id.notification_subscribed_llsv);
+        oLL.removeAllViews();
+
+        buttonsPubIds.clear();
 
         for(int i = 0 ; i < pubs.size() ; i++)
         {
-            if(publishedPubKeys.contains(pubIds.get(i)))
-                continue;
-
-            publishedPubKeys.add(pubIds.get(i));
-
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_subscribed_line, null);
             oCL1.setId(View.generateViewId());
 
@@ -203,7 +203,7 @@ public class NotificationSubscribed extends AppCompatActivity
         int i = buttonsPubIds.indexOf(v.getId());
 
         Intent intent = new Intent(this, Post.class);
-        intent.putExtra("idPub", pubIds.get(i));
+        intent.putExtra("idPub", pubKeys.get(i));
         startActivity(intent);
     }
 }

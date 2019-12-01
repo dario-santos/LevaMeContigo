@@ -29,7 +29,6 @@ public class NotificationRequested extends AppCompatActivity
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
     private ArrayList<String> pubKeys = new ArrayList<>();
-    private ArrayList<String> publishedPubKeys = new ArrayList<>();
 
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
 
@@ -52,11 +51,11 @@ public class NotificationRequested extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                pubKeys.clear();
+                pubs.clear();
+
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
-                    if(pubKeys.contains(value.getKey()))
-                        continue;
-
                     Publicacao pub = value.getValue(Publicacao.class);
 
                     if(idUser.equals(pub.getIdUser()))
@@ -80,14 +79,12 @@ public class NotificationRequested extends AppCompatActivity
     private void ShowPostsToUser()
     {
         LinearLayout oLL = findViewById(R.id.notification_requested_llsv);
+        oLL.removeAllViews();
+
+        buttonsPubIds.clear();
 
         for(int i = 0 ; i < pubs.size() ; i++)
         {
-            if(publishedPubKeys.contains(pubKeys.get(i)))
-                continue;
-
-            publishedPubKeys.add(pubKeys.get(i));
-
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_subscribed_line, null);
             oCL1.setId(View.generateViewId());
 

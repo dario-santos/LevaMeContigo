@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bdc3c7"
+    android:background="@color/colorPrimary"
     tools:context=".Perfil">
 
     <ImageButton
@@ -51,10 +51,10 @@
         android:layout_height="wrap_content"
         android:text="Perfil"
         android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="@+id/perfil_back"
+        app:layout_constraintBottom_toBottomOf="@id/perfil_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/perfil_back"
+        app:layout_constraintTop_toTopOf="@id/perfil_back"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
@@ -63,6 +63,7 @@
         android:layout_height="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
         app:layout_constraintEnd_toStartOf="@+id/perfil_avaliacao"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/perfil_avaliacao" />
 
@@ -72,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Viagens"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/perfil_viagens"
         app:layout_constraintStart_toStartOf="@+id/perfil_viagens"
         app:layout_constraintTop_toBottomOf="@+id/perfil_viagens" />
@@ -84,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/perfil_username"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/textView6"
@@ -92,6 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Avaliação"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView19"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/perfil_avaliacao" />
@@ -100,8 +103,10 @@
         android:id="@+id/perfil_anos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="0,0"
         app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toEndOf="@+id/perfil_avaliacao"
         app:layout_constraintTop_toTopOf="@+id/perfil_avaliacao" />
 
@@ -111,6 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Anos"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/perfil_anos"
         app:layout_constraintStart_toStartOf="@+id/perfil_anos"
         app:layout_constraintTop_toBottomOf="@+id/perfil_anos" />
@@ -119,33 +125,32 @@
         android:id="@+id/imageView3"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/perfil_avaliacao"
         app:layout_constraintStart_toEndOf="@+id/perfil_avaliacao"
         app:layout_constraintTop_toTopOf="@+id/perfil_avaliacao"
-        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/ic_star" />
 
     <ImageButton
         android:id="@+id/perfil_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_logout"
         android:onClick="HandleLogout"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/perfil_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@android:drawable/sym_call_outgoing" />
+        app:layout_constraintTop_toTopOf="@+id/perfil_back"
+        app:layout_constraintVertical_bias="0.025" />
 
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:background="#DFD8D8"
+        android:layout_marginTop="20dp"
+        android:background="#FAFAFA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,13 +167,13 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Avaliações:"
-        android:textSize="20sp"
+        android:text="Avaliações"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
