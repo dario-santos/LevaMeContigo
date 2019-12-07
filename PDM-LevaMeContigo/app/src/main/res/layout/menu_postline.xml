@@ -23,13 +23,12 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="7dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/ic_profile_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_profile_user" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/postline_origemdestino"

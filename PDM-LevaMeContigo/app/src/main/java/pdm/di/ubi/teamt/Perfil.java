@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +45,8 @@ public class Perfil extends AppCompatActivity
     private float userRating = 0;
 
     private ArrayList<Avaliar> avaliacoes =  new ArrayList<>();
+    private ArrayList<User> users=  new ArrayList<>();
+    private ArrayList<String> userKeys=  new ArrayList<>();
 
     private ArrayList<Integer> buttonsUserIds =  new ArrayList<>();
 
@@ -151,16 +155,16 @@ public class Perfil extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 avaliacoes.clear();
+                userKeys.clear();
 
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Avaliar avaliar = value.getValue(Avaliar.class);
                     avaliacoes.add(avaliar);
+                    userKeys.add(avaliar.getIdUserAvaliador());
                 }
 
-                ShowAvaliarToUser();
-                GetUserRate();
-                GetUserFromDB(idUser);
+                GetUsersFromDB(idUser);
             }
 
             @Override
@@ -169,6 +173,37 @@ public class Perfil extends AppCompatActivity
 
         DatabaseReference myRef = mDatabase.child("Avaliar");
         myRef.orderByChild("idUserAvaliado").equalTo(idUser).addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    private void GetUsersFromDB(final String idUser)
+    {
+
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                users.clear();
+
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    if(userKeys.contains(value.getKey()))
+                    {
+                        User user = value.getValue(User.class);
+                        users.add(user);
+                    }
+                }
+
+                ShowAvaliarToUser();
+                GetUserRate();
+                GetUserFromDB(idUser);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError){}
+        };
+        DatabaseReference myRef = mDatabase.child("User");
+        myRef.orderByKey().addValueEventListener(valueEventListener);
     }
 
     private void ShowAvaliarToUser()
@@ -181,7 +216,11 @@ public class Perfil extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.perfil_line, null);
             oCL1.setId(View.generateViewId());
 
+            User user = users.get(userKeys.indexOf(avaliacoes.get(i).getIdUserAvaliador()));
             ImageView userProfile = oCL1.findViewById(R.id.perfil_line_userimage);
+            userProfile.setBackgroundTintList(ColorStateList.valueOf(
+                    Color.parseColor(user.getUserAvatar())));
+
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -240,8 +279,11 @@ public class Perfil extends AppCompatActivity
         TextView viagens = findViewById(R.id.perfil_viagens);
         TextView nota = findViewById(R.id.perfil_avaliacao);
         TextView anos = findViewById(R.id.perfil_anos);
+        ImageView userAvatar = findViewById(R.id.perfil_userimage);
 
         String rating = userRating == -1 ? "Calculating" : String.format("%.1f", userRating);
+
+        userAvatar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(user.getUserAvatar())));
 
         username.setText(user.getNome());
         viagens.setText(Integer.toString(numberOfBoleias));

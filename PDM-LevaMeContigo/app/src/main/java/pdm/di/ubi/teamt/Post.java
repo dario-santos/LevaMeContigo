@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +48,8 @@ public class Post extends AppCompatActivity
     private String idPub = null;
 
     private ArrayList<Comentario> comentarios = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<String> userKeys = new ArrayList<>();
 
     private ArrayList<Integer> buttonsIdUsers = new ArrayList<>();
 
@@ -80,6 +84,10 @@ public class Post extends AppCompatActivity
                 for (DataSnapshot value : dataSnapshot.getChildren())
                 {
                     User user = value.getValue(User.class);
+                    ImageView userAvatar = findViewById(R.id.post_userimage);
+                    userAvatar.setBackgroundTintList(ColorStateList.valueOf(
+                            Color.parseColor(user.getUserAvatar())));
+
                     TextView userName = findViewById(R.id.post_username);
                     userName.setText(user.getNome());
                 }
@@ -221,13 +229,46 @@ public class Post extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 comentarios.clear();
+                userKeys.clear();
 
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
                     Comentario comentario = value.getValue(Comentario.class);
 
                     if(comentario.getIdPub().equals(idPub))
+                    {
                         comentarios.add(comentario);
+                        userKeys.add(comentario.getIdUser());
+                    }
+                }
+
+                GetUsersFromDB();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        DatabaseReference postRef = mDatabase.child("Comentario");
+        postRef.addValueEventListener(valueEventListener);
+    }
+
+    private void GetUsersFromDB()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                users.clear();
+
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    if(userKeys.contains(value.getKey()))
+                    {
+                        User user = value.getValue(User.class);
+                        users.add(user);
+                    }
                 }
 
                 ShowComentariosToUser();
@@ -237,7 +278,7 @@ public class Post extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         };
 
-        DatabaseReference postRef = mDatabase.child("Comentario");
+        DatabaseReference postRef = mDatabase.child("User");
         postRef.addValueEventListener(valueEventListener);
     }
 
@@ -251,7 +292,11 @@ public class Post extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.comment_line, null);
             oCL1.setId(View.generateViewId());
 
+            User user = users.get(userKeys.indexOf(comentarios.get(i).getIdUser()));
             ImageView userProfile = oCL1.findViewById(R.id.comment_line_userprofile);
+            userProfile.setBackgroundTintList(ColorStateList.valueOf(
+                    Color.parseColor(user.getUserAvatar())));
+
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import pdm.di.ubi.teamt.tables.User;
 
@@ -100,7 +101,11 @@ public class SignUp extends AppCompatActivity
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-        User newUser = new User(name.getText().toString(), 0, 5f, df.format(c));
+        Random obj = new Random();
+        int rand_num = obj.nextInt(0xffffff + 1);
+        String colorCode = String.format("#%06x", rand_num);
+
+        User newUser = new User(name.getText().toString(), df.format(c), colorCode);
 
         DatabaseReference myRef = mDatabase.getReference("User");
 

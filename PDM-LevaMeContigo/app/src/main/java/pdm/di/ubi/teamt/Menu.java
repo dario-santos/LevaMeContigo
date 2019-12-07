@@ -1,9 +1,12 @@
 package pdm.di.ubi.teamt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -24,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import pdm.di.ubi.teamt.tables.Publicacao;
+import pdm.di.ubi.teamt.tables.User;
 
 public class Menu extends AppCompatActivity
 {
@@ -32,6 +37,8 @@ public class Menu extends AppCompatActivity
 
     private ArrayList<Publicacao> pubs = new ArrayList<>();
     private ArrayList<String> pubKeys = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<String> usersKeys = new ArrayList<>();
 
     private ArrayList<Integer> buttonsUserIds = new ArrayList<>();
     private ArrayList<Integer> buttonsPubIds = new ArrayList<>();
@@ -45,7 +52,41 @@ public class Menu extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        GetUserFromDB(mFirebaseUser.getUid());
         GetPubsFromDB();
+    }
+
+    private void GetUserFromDB(String idUser)
+    {
+        DatabaseReference myRef = mDatabase.child("User");
+
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists())
+                    return;
+
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    User user = value.getValue(User.class);
+                    UpdateGUI(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError){}
+        };
+
+        Query query = myRef.orderByKey().equalTo(idUser);
+        query.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    private void UpdateGUI(User user)
+    {
+        ImageView userAvatar = findViewById(R.id.menu_perfil);
+
+        userAvatar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(user.getUserAvatar())));
     }
 
     private void GetPubsFromDB()
@@ -58,6 +99,7 @@ public class Menu extends AppCompatActivity
 
                 pubs.clear();
                 pubKeys.clear();
+                usersKeys.clear();
 
                 for(DataSnapshot value : dataSnapshot.getChildren())
                 {
@@ -67,9 +109,10 @@ public class Menu extends AppCompatActivity
 
                         pubs.add(publicacao);
                         pubKeys.add(value.getKey());
+                        usersKeys.add(publicacao.getIdUser());
                     }
                 }
-                ShowPubsToUser();
+                GetUsersFromDB();
             }
 
             @Override
@@ -85,6 +128,34 @@ public class Menu extends AppCompatActivity
         postRef.orderByChild("data").startAt(formatedDate).addValueEventListener(valueEventListener);
     }
 
+    private void GetUsersFromDB()
+    {
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                users.clear();
+
+                for(DataSnapshot value : dataSnapshot.getChildren())
+                {
+                    if(usersKeys.contains(value.getKey()))
+                    {
+                        User user = value.getValue(User.class);
+                        users.add(user);
+                    }
+                }
+                ShowPubsToUser();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+
+        DatabaseReference postRef = mDatabase.child("User");
+        postRef.orderByKey().addValueEventListener(valueEventListener);
+    }
+
     private void ShowPubsToUser()
     {
         LinearLayout oLL = findViewById(R.id.menu_llsv);
@@ -98,7 +169,11 @@ public class Menu extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
 
+            User user = users.get(usersKeys.indexOf(pubs.get(i).getIdUser()));
             ImageView userProfile = oCL1.findViewById(R.id.postline_userprofile);
+            userProfile.setBackgroundTintList(ColorStateList.valueOf(
+                    Color.parseColor(user.getUserAvatar())));
+
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {
                 @Override

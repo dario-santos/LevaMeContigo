@@ -8,18 +8,16 @@ import java.util.Map;
 public class User
 {
     private String nome;
-    private int numViagens;
-    private float nota;
     private String dataInscricao;
+    private String userAvatar;
 
     public User() {}
 
-    public User(String nome, int numViagens, float nota, String dataInscricao)
+    public User(String nome, String dataInscricao, String userAvatar)
     {
         this.nome = nome;
-        this.numViagens = Integer.valueOf(numViagens);
-        this.nota = Float.valueOf(nota);
         this.dataInscricao = dataInscricao;
+        this.userAvatar = userAvatar;
     }
 
     public String getNome()
@@ -27,29 +25,24 @@ public class User
         return nome;
     }
 
-    public int getNumViagens()
-    {
-        return numViagens;
-    }
-
-    public float getNota()
-    {
-        return nota;
-    }
-
     public String getDataInscricao()
     {
         return dataInscricao;
     }
+
+    public String getUserAvatar()
+    {
+        return userAvatar;
+    }
+
 
     @Exclude
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nome", nome);
-        result.put("numViagens", numViagens);
-        result.put("nota", nota);
         result.put("dataInscricao", dataInscricao);
+        result.put("userAvatar", userAvatar);
 
         return result;
     }
