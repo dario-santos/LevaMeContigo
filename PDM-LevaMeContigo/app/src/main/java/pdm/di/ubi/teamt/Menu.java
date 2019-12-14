@@ -170,6 +170,7 @@ public class Menu extends AppCompatActivity
             oCL1.setId(View.generateViewId());
 
             User user = users.get(usersKeys.indexOf(pubs.get(i).getIdUser()));
+
             ImageView userProfile = oCL1.findViewById(R.id.postline_userprofile);
             userProfile.setBackgroundTintList(ColorStateList.valueOf(
                     Color.parseColor(user.getUserAvatar())));

@@ -269,7 +269,7 @@ public class Perfil extends AppCompatActivity
         stars.add(star5);
 
         for(int i = 0 ; i < rate ; i++)
-            star1.setBackground( getDrawable(R.drawable.ic_star_filled));
+            stars.get(i).setBackground(getDrawable(R.drawable.ic_star_filled));
 
     }
 
