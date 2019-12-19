@@ -167,10 +167,7 @@ public class NotificationRequestedRequest extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.notification_requested_request_line, null);
             oCL1.setId(View.generateViewId());
 
-            User user = users.get(userIds.indexOf(inscritos.get(i).getIdUser()));
             ImageView userProfile = oCL1.findViewById(R.id.requested_request_useravatar);
-            userProfile.setBackgroundTintList(ColorStateList.valueOf(
-                    Color.parseColor(user.getUserAvatar())));
 
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {

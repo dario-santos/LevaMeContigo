@@ -30,11 +30,6 @@ public class User
         return dataInscricao;
     }
 
-    public String getUserAvatar()
-    {
-        return userAvatar;
-    }
-
 
     @Exclude
     public Map<String, Object> toMap()

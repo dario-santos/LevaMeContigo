@@ -143,11 +143,7 @@ public class SearchResults extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
 
-            User user = users.get(usersKeys.indexOf(pubs.get(i).getIdUser()));
-
             ImageView userProfile = oCL1.findViewById(R.id.postline_userprofile);
-            userProfile.setBackgroundTintList(ColorStateList.valueOf(
-                    Color.parseColor(user.getUserAvatar())));
 
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {

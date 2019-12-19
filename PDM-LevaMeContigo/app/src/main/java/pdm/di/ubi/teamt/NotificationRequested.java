@@ -18,7 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import pdm.di.ubi.teamt.tables.Publicacao;
 
@@ -72,8 +75,13 @@ public class NotificationRequested extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         };
 
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String formatedDate = dateFormatter.format(date);
+
         DatabaseReference postRef = mDatabase.child("Post");
-        postRef.orderByChild("data").addValueEventListener(pubValueEventListener);
+        postRef.orderByChild("data").startAt(formatedDate).addValueEventListener(pubValueEventListener);
     }
 
     private void ShowPostsToUser()

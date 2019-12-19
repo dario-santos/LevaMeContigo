@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.util.DataUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -85,9 +84,6 @@ public class Post extends AppCompatActivity
                 {
                     User user = value.getValue(User.class);
                     ImageView userAvatar = findViewById(R.id.post_userimage);
-                    userAvatar.setBackgroundTintList(ColorStateList.valueOf(
-                            Color.parseColor(user.getUserAvatar())));
-
                     TextView userName = findViewById(R.id.post_username);
                     userName.setText(user.getNome());
                 }
@@ -292,10 +288,7 @@ public class Post extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.comment_line, null);
             oCL1.setId(View.generateViewId());
 
-            User user = users.get(userKeys.indexOf(comentarios.get(i).getIdUser()));
             ImageView userProfile = oCL1.findViewById(R.id.comment_line_userprofile);
-            userProfile.setBackgroundTintList(ColorStateList.valueOf(
-                    Color.parseColor(user.getUserAvatar())));
 
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {

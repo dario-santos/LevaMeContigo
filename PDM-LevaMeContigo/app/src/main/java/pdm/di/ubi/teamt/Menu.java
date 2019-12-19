@@ -52,41 +52,7 @@ public class Menu extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        GetUserFromDB(mFirebaseUser.getUid());
         GetPubsFromDB();
-    }
-
-    private void GetUserFromDB(String idUser)
-    {
-        DatabaseReference myRef = mDatabase.child("User");
-
-        ValueEventListener valueEventListener = new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.exists())
-                    return;
-
-                for(DataSnapshot value : dataSnapshot.getChildren())
-                {
-                    User user = value.getValue(User.class);
-                    UpdateGUI(user);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError){}
-        };
-
-        Query query = myRef.orderByKey().equalTo(idUser);
-        query.addListenerForSingleValueEvent(valueEventListener);
-    }
-
-    private void UpdateGUI(User user)
-    {
-        ImageView userAvatar = findViewById(R.id.menu_perfil);
-
-        userAvatar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(user.getUserAvatar())));
     }
 
     private void GetPubsFromDB()
@@ -169,12 +135,7 @@ public class Menu extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.menu_postline, null);
             oCL1.setId(View.generateViewId());
 
-            User user = users.get(usersKeys.indexOf(pubs.get(i).getIdUser()));
-
             ImageView userProfile = oCL1.findViewById(R.id.postline_userprofile);
-            userProfile.setBackgroundTintList(ColorStateList.valueOf(
-                    Color.parseColor(user.getUserAvatar())));
-
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {
                 @Override

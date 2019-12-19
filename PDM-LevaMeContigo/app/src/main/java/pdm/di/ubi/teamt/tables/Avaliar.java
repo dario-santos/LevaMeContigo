@@ -32,7 +32,6 @@ public class Avaliar
         return idUserAvaliador;
     }
 
-
     public String getNomeAvaliador()
     {
         return nomeAvaliador;

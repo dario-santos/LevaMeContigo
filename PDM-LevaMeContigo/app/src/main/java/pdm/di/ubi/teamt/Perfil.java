@@ -216,11 +216,7 @@ public class Perfil extends AppCompatActivity
             ConstraintLayout oCL1 = (ConstraintLayout) getLayoutInflater().inflate(R.layout.perfil_line, null);
             oCL1.setId(View.generateViewId());
 
-            User user = users.get(userKeys.indexOf(avaliacoes.get(i).getIdUserAvaliador()));
             ImageView userProfile = oCL1.findViewById(R.id.perfil_line_userimage);
-            userProfile.setBackgroundTintList(ColorStateList.valueOf(
-                    Color.parseColor(user.getUserAvatar())));
-
             userProfile.setClickable(true);
             userProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -279,11 +275,8 @@ public class Perfil extends AppCompatActivity
         TextView viagens = findViewById(R.id.perfil_viagens);
         TextView nota = findViewById(R.id.perfil_avaliacao);
         TextView anos = findViewById(R.id.perfil_anos);
-        ImageView userAvatar = findViewById(R.id.perfil_userimage);
 
         String rating = userRating == -1 ? "Calculating" : String.format("%.1f", userRating);
-
-        userAvatar.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(user.getUserAvatar())));
 
         username.setText(user.getNome());
         viagens.setText(Integer.toString(numberOfBoleias));
