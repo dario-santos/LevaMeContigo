@@ -499,4 +499,11 @@ public class Post extends AppCompatActivity
     {
         DeleteComentariosFromDB();
     }
+
+    public void HandleEditPost(View v)
+    {
+        Intent intent = new Intent(this, EditPost.class);
+        intent.putExtra("idPub", idPub);
+        startActivity(intent);
+    }
 }
