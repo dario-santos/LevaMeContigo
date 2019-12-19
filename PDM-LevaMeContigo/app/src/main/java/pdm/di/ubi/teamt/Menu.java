@@ -1,12 +1,10 @@
 package pdm.di.ubi.teamt;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +17,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -225,6 +222,13 @@ public class Menu extends AppCompatActivity
     {
         Intent intent = new Intent(this, Search.class);
 
+        startActivity(intent);
+    }
+
+    public void HandleVisitCovilha(View v)
+    {
+        Uri uri = Uri.parse("http://www.cm-covilha.pt/");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 }

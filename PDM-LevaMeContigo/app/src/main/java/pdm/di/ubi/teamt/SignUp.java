@@ -101,11 +101,8 @@ public class SignUp extends AppCompatActivity
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-        Random obj = new Random();
-        int rand_num = obj.nextInt(0xffffff + 1);
-        String colorCode = String.format("#%06x", 0x2c3e50);
 
-        User newUser = new User(name.getText().toString(), df.format(c), colorCode);
+        User newUser = new User(name.getText().toString(), df.format(c));
 
         DatabaseReference myRef = mDatabase.getReference("User");
 

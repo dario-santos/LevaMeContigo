@@ -9,15 +9,13 @@ public class User
 {
     private String nome;
     private String dataInscricao;
-    private String userAvatar;
 
     public User() {}
 
-    public User(String nome, String dataInscricao, String userAvatar)
+    public User(String nome, String dataInscricao)
     {
         this.nome = nome;
         this.dataInscricao = dataInscricao;
-        this.userAvatar = userAvatar;
     }
 
     public String getNome()
@@ -30,14 +28,12 @@ public class User
         return dataInscricao;
     }
 
-
     @Exclude
     public Map<String, Object> toMap()
     {
         HashMap<String, Object> result = new HashMap<>();
         result.put("nome", nome);
         result.put("dataInscricao", dataInscricao);
-        result.put("userAvatar", userAvatar);
 
         return result;
     }

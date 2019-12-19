@@ -26,7 +26,10 @@ public class Email
             return false;
 
         String e = email.replaceFirst(Pattern.quote(domain), "");
-        
+
+        if(e.isEmpty())
+            return false;
+
         for(int i = 0 ; i < e.length() ; i++)
             if(validAlphabet.indexOf(e.charAt(i)) == -1)
                 return false;

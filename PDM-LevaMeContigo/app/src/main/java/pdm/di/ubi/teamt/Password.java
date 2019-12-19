@@ -7,7 +7,6 @@ public class Password
                                             + "abcdefghijklmnopqrstuvxyz"
                                             + "!\"#$%&/()=?";
 
-   
     private Password(){}
     
     /**
