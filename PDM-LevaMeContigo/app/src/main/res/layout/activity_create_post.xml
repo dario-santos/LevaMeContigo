@@ -8,19 +8,20 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="364dp"
-        android:layout_height="82dp"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
         app:layout_constraintBottom_toBottomOf="@+id/createpost_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/darker_gray" />
+        app:srcCompat="@color/colorPrimary" />
 
     <ImageButton
         android:id="@+id/createpost_back"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -34,6 +35,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleAddPost"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,19 +52,21 @@
         android:text="De:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.1" />
 
     <Spinner
         android:id="@+id/createpost_origem"
-        android:layout_width="100dp"
-        android:layout_height="24dp"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
         android:layout_marginStart="20dp"
+        android:entries="@array/destinos_origens"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView9"
@@ -74,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/textView10"
@@ -86,7 +90,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <TextView
         android:id="@+id/textView11"
@@ -94,39 +98,42 @@
         android:layout_height="wrap_content"
         android:text="Hora:"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contrição:"
+        android:text="Contrapartidas:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <Spinner
         android:id="@+id/createpost_destino"
-        android:layout_width="100dp"
-        android:layout_height="24dp"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
+        android:entries="@array/destinos_origens"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/createpost_constricao"
-        android:layout_width="wrap_content"
+        android:id="@+id/createpost_contrapartidas"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Tem que pagar 5 euros pela gasolina."
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,30 +154,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
 
-    <EditText
-        android:id="@+id/createpost_data"
-        android:layout_width="100dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.50" />
-
-    <EditText
-        android:id="@+id/createpost_hora"
-        android:layout_width="100dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="4dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.5" />
-
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
@@ -181,16 +164,43 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.12" />
 
     <Spinner
-        android:id="@+id/spinner7"
-        android:layout_width="41dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="4dp"
+        android:id="@+id/createpost_numpessoas"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:entries="@array/numPessoas"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.50" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/createpost_datePicker"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:focusable="false"
+        android:hint="yyyy-mm-dd"
+        android:onClick="HandleShowCalendar"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/createpost_hourPicker"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="6dp"
+        android:focusable="false"
+        android:hint="hh:mm"
+        android:onClick="HandleShowClock"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

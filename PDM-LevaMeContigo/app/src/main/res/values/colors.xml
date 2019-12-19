@@ -6,4 +6,7 @@
 
     <color name="PerfilBackGround">#BDC3C7</color>
     <color name="black">#000000</color>
+
+    <color name="post_red">#c0392b</color>
+    <color name="post_green">#27ae60</color>
 </resources>

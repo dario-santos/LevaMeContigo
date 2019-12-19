@@ -9,18 +9,19 @@
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="0dp"
-        android:layout_height="181dp"
+        android:layout_height="152dp"
         app:layout_constraintBottom_toBottomOf="@+id/notification_requested_request_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/PerfilBackGround" />
+        app:srcCompat="@color/colorPrimary" />
 
     <ImageButton
         android:id="@+id/notification_requested_request_back"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -51,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notification_requested_request_back"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.025" />
 
     <TextView
         android:id="@+id/notification_requested_request_hora"
@@ -67,16 +68,15 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ScrollView
-        android:layout_width="358dp"
-        android:layout_height="491dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView9">
 
         <LinearLayout
+            android:id="@+id/notification_requested_request_llsv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

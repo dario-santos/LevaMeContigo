@@ -9,20 +9,21 @@
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="@+id/search_results_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@color/PerfilBackGround" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@color/colorPrimary" />
 
     <ImageButton
         android:id="@+id/search_results_back"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="#00FFFFFF"
+        android:onClick="HandleBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -35,23 +36,23 @@
         android:id="@+id/search_results_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Resultados da Pesquisa"
+        android:text="Resultados"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="@+id/search_results_back"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search_results_back"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/search_results_back" />
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="667dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
         <LinearLayout
+            android:id="@+id/searchresults_llsv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "504024097527",
+    "firebase_url": "https://levamecontigo-90ce8.firebaseio.com",
+    "project_id": "levamecontigo-90ce8",
+    "storage_bucket": "levamecontigo-90ce8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504024097527:android:91644f60b4b57d7cbfe9f2",
+        "android_client_info": {
+          "package_name": "pdm.di.ubi.teamt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504024097527-ehsujvvrhhp0nml87egeoifpuk5npebd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pdm.di.ubi.teamt",
+            "certificate_hash": "eb4ca8695a8e5c6634aa2a49ccd308a2d628e929"
+          }
+        },
+        {
+          "client_id": "504024097527-ii791vk65b2ojc6530u8strsj5jg7088.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmu2WqZuZnbcIjQkwJAG3WTx5otChXMnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504024097527-ii791vk65b2ojc6530u8strsj5jg7088.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

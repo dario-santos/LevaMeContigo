@@ -9,22 +9,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Comment"></activity>
-        <activity android:name=".Rate" />
-        <activity android:name=".NotificationSubscribed" />
-        <activity android:name=".NotificationRequestedRequest" />
-        <activity android:name=".NotificationRequested" />
-        <activity android:name=".Menu" />
-        <activity android:name=".MenuGuest" />
-        <activity android:name=".SearchResults" />
-        <activity android:name=".Post" />
-        <activity android:name=".CreatePost" />
-        <activity android:name=".Search" />
-        <activity android:name=".Perfil" />
-        <activity android:name=".ChangePassword" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".SignIn" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".EditPost"></activity>
+        <activity
+            android:name=".Comment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Rate"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NotificationSubscribed"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NotificationRequestedRequest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NotificationRequested"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Menu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuGuest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SearchResults"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Post"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreatePost"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Search"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Perfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUp"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignIn"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

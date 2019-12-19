@@ -1,4 +1,4 @@
-package team.t.levamecontigo;
+package pdm.di.ubi.teamt;
 
 public class Password
 {
@@ -7,7 +7,6 @@ public class Password
                                             + "abcdefghijklmnopqrstuvxyz"
                                             + "!\"#$%&/()=?";
 
-   
     private Password(){}
     
     /**
